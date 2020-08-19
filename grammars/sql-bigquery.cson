@@ -28,6 +28,9 @@
     'include': '#javascript'
   }
   {
+    'include': 'source.jinja'
+  }
+  {
     'captures':
       '1':
         'name': 'keyword.other.create.sql'
