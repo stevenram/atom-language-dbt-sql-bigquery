@@ -1,7 +1,7 @@
 {
-  "name": "language-sql-bigquery",
+  "name": "language-dbt-sql-bigquery",
   "version": "1.3.0",
-  "description": "BigQuery SQL language support in Atom",
+  "description": "BigQuery SQL language support in Atom with dbt flavor",
   "keywords": [
     "language",
     "sql",
@@ -9,7 +9,7 @@
     "grammar",
     "snippets"
   ],
-  "repository": "https://github.com/shinichi-takii/atom-language-sql-bigquery",
+  "repository": "https://github.com/stevenram/atom-language-dbt-sql-bigquery",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
