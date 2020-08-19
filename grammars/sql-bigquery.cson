@@ -1,5 +1,5 @@
 'scopeName': 'source.sql-bigquery'
-'name': 'SQL (BigQuery)'
+'name': 'SQL (dbt BigQuery)'
 'fileTypes': [
   'sql'
   'ddl'
