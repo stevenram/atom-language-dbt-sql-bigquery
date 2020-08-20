@@ -16,49 +16,49 @@
   'SELECT ... FROM':
     'prefix': 'select'
     'body': """
-      SELECT
+      select
       \t${1:column}
-      FROM `${2:project}.${3:dataset}.${4:table}`
-      WHERE ${5:condition}
+      from `${2:project}.${3:dataset}.${4:table}`
+      where ${5:condition}
     """
 
   'INNER JOIN':
     'prefix': 'inner join'
-    'body': 'INNER JOIN `${1:project}.${2:dataset}.${3:table}`'
+    'body': 'inner join `${1:project}.${2:dataset}.${3:table}`'
   'LEFT JOIN':
     'prefix': 'left join'
-    'body': 'LEFT JOIN `${1:project}.${2:dataset}.${3:table}`'
+    'body': 'left join `${1:project}.${2:dataset}.${3:table}`'
   'RIGHT JOIN':
     'prefix': 'right join'
-    'body': 'RIGHT JOIN `${1:project}.${2:dataset}.${3:table}`'
+    'body': 'right join `${1:project}.${2:dataset}.${3:table}`'
   'FULL OUTER JOIN':
     'prefix': 'full join'
-    'body': 'FULL OUTER JOIN `${1:project}.${2:dataset}.${3:table}`'
+    'body': 'full outer join `${1:project}.${2:dataset}.${3:table}`'
   'BETWEEN ... AND':
     'prefix': 'between'
-    'body': '${1} BETWEEN ${2} AND ${3}'
+    'body': '${1} between ${2} and ${3}'
   'IN (value, ...)':
     'prefix': 'in'
-    'body': 'IN (${1:value, ...})'
+    'body': 'in (${1:value, ...})'
   'GROUP BY':
     'prefix': 'groupby'
-    'body': 'GROUP BY ${1}'
+    'body': 'group by ${1}'
   'ORDER BY':
     'prefix': 'orderby'
-    'body': 'ORDER BY ${1}'
+    'body': 'order by ${1}'
   'PARTITION BY':
     'prefix': 'partitionby'
-    'body': 'PARTITION BY ${1:DATE(_PARTITIONTIME)|DATE(<timestamp_column>)|<date_column>}'
+    'body': 'partition by ${1:date(_PARTITIONTIME)|date(<timestamp_column>)|<date_column>}'
   'CLUSTER BY':
     'prefix': 'clusterby'
-    'body': 'CLUSTER BY ${1:clustering_column_list}'
+    'body': 'cluster by ${1:clustering_column_list}'
   'WITH ... AS':
     'prefix': 'with'
     'body': """
-      WITH ${1:with_query_name} AS (
-        SELECT
+      with ${1:with_query_name} as (
+        select
           ${2}
-        FROM
+        from
           `${3:project}.${4:dataset}.${5:table}`
       )
 
@@ -66,126 +66,126 @@
 
   '_TABLE_SUFFIX BETWEEN ...':
     'prefix': '_tablesuffix'
-    'body': '_TABLE_SUFFIX BETWEEN "${1:from}" AND "${2:to}"'
+    'body': '_TABLE_SUFFIX between "${1:from}" and "${2:to}"'
   '_TABLE_SUFFIX BETWEEN ..':
     'prefix': 'tablesuffix'
-    'body': '_TABLE_SUFFIX BETWEEN "${1:from}" AND "${2:to}"'
+    'body': '_TABLE_SUFFIX between "${1:from}" and "${2:to}"'
 
   '_PARTITIONTIME BETWEEN ...':
     'prefix': '_partitiontime'
-    'body': '_PARTITIONTIME BETWEEN "${1:yyyy-mm-dd}" AND "${2:yyyy-mm-dd}"'
+    'body': '_PARTITIONTIME between "${1:yyyy-mm-dd}" and "${2:yyyy-mm-dd}"'
   '_PARTITIONTIME BETWEEN ..':
     'prefix': 'partitiontime'
-    'body': '_PARTITIONTIME BETWEEN "${1:yyyy-mm-dd}" AND "${2:yyyy-mm-dd}"'
+    'body': '_PARTITIONTIME between "${1:yyyy-mm-dd}" and "${2:yyyy-mm-dd}"'
 
   'INSERT INTO':
     'prefix': 'insert'
     'body': """
-      INSERT INTO `${1:project}.${2:dataset}.${3:table}`
+      insert into `${1:project}.${2:dataset}.${3:table}`
       \t(${4:column, ...})
-      VALUES
+      values
       \t(${6:expr, ...})
     """
   'INSERT INTO SELECT':
     'prefix': 'insert select'
     'body': """
-      INSERT INTO `${1:project}.${2:dataset}.${3:table}`
+      insert into `${1:project}.${2:dataset}.${3:table}`
       \t(${4:column, ...})
-      SELECT
+      select
       \t${5:column}
-      FROM `${6:project}.${7:dataset}.${8:table}`
-      WHERE ${9:condition}
+      from `${6:project}.${7:dataset}.${8:table}`
+      where ${9:condition}
     """
 
   'DELETE FROM ...':
     'prefix': 'delete'
     'body': """
-      DELETE FROM `${1:project}.${2:dataset}.${3:table}`
-      WHERE ${4:condition}
+      delete from `${1:project}.${2:dataset}.${3:table}`
+      where ${4:condition}
     """
 
   'UPDATE ... SET':
     'prefix': 'update'
     'body': """
-      UPDATE `${1:project}.${2:dataset}.${3:table}`
-      SET ${4:column} = ${5:value}
-      WHERE ${6:condition}
+      update `${1:project}.${2:dataset}.${3:table}`
+      set ${4:column} = ${5:value}
+      where ${6:condition}
     """
   'UPDATE ... SET FROM':
     'prefix': 'update from'
     'body': """
-      UPDATE `${1:project}.${2:dataset}.${3:table}` a
-      SET ${4:column} = ${5:value}
-      FROM `${6:project}.${7:dataset}.${8:table}` b
-      WHERE a.${9:column} = b.${9:column}
+      update `${1:project}.${2:dataset}.${3:table}` a
+      set ${4:column} = ${5:value}
+      from `${6:project}.${7:dataset}.${8:table}` b
+      where a.${9:column} = b.${9:column}
     """
 
   'MERGE':
     'prefix': 'merge'
     'body': """
-      MERGE INTO `${1:project}.${2:dataset}.${3:target_table}` t
-      USING `${4:project}.${5:dataset}.${6:source_table}` s
-      ON ${7:merge_condition}
-      WHEN MATCHED THEN
-      \tUPDATE SET ${8:target_column} = ${9:value}
-      WHEN NOT MATCHED THEN
-      \tINSERT (${10:target_column, ...}) VALUES(${11:source_column, ...})
-      WHEN MATCHED AND ${12:other_condition} THEN
-      \tDELETE
+      merge into `${1:project}.${2:dataset}.${3:target_table}` t
+      using `${4:project}.${5:dataset}.${6:source_table}` s
+      on ${7:merge_condition}
+      when matched then
+      \tupdate set ${8:target_column} = ${9:value}
+      when not matched then
+      \tinsert (${10:target_column, ...}) values(${11:source_column, ...})
+      when matched and ${12:other_condition} then
+      \tdelete
     """
 
   'CREATE TABLE':
     'prefix': 'create table'
     'body': """
-      CREATE TABLE `${1:project}.${2:dataset}.${3:table}`
+      create table `${1:project}.${2:dataset}.${3:table}`
       (
-      \t${4:column} ${5:type}${6: OPTIONS (description = "comment")}
+      \t${4:column} ${5:type}${6: options (description = "comment")}
       )
     """
   'CREATE TABLE IF NOT EXISTS':
     'prefix': 'create table if not exists'
     'body': """
-      CREATE TABLE IF NOT EXISTS `${1:project}.${2:dataset}.${3:table}`
+      create table if not exsists `${1:project}.${2:dataset}.${3:table}`
       (
-      \t${4:column} ${5:type}${6: OPTIONS (description = "comment")}
+      \t${4:column} ${5:type}${6: options (description = "comment")}
       )
     """
   'CREATE OR REPLACE TABLE':
     'prefix': 'create or replace table'
     'body': """
-      CREATE OR REPLACE TABLE `${1:project}.${2:dataset}.${3:table}`
+      create or replace table `${1:project}.${2:dataset}.${3:table}`
       (
-      \t${4:column} ${5:type}${6: OPTIONS (description = "comment")}
+      \t${4:column} ${5:type}${6: options (description = "comment")}
       )
     """
   'CREATE TABLE ... PARTITION BY':
     'prefix': 'create table partition'
     'body': """
-      CREATE TABLE `${1:project}.${2:dataset}.${3:table}`
+      create table `${1:project}.${2:dataset}.${3:table}`
       (
-      \t${4:column} ${5:type}${6: OPTIONS (description = "comment")}
+      \t${4:column} ${5:type}${6: options (description = "comment")}
       )
-      PARTITION BY ${7:DATE(_PARTITIONTIME)|DATE(<timestamp_column>)|<date_column>}
-      ${8:[CLUSTER BY clustering_column_list]}
+      partition by ${7:date(_PARTITIONTIME)|date(<timestamp_column>)|<date_column>}
+      ${8:[cluster by clustering_column_list]}
     """
   'CREATE TABLE AS SELECT':
     'prefix': 'create table as select'
     'body': """
-      CREATE TABLE `${1:project}.${2:dataset}.${3:table}`
+      create table `${1:project}.${2:dataset}.${3:table}`
       (
-      \t${4:column} ${5:type}${6: OPTIONS (description = "comment")}
-      ) AS
-      SELECT
+      \t${4:column} ${5:type}${6: options (description = "comment")}
+      ) as
+      select
       \t${7:column}
-      FROM `${8:project}.${9:dataset}.${10:table}`
-      WHERE ${11:condition}
+      from `${8:project}.${9:dataset}.${10:table}`
+      where ${11:condition}
     """
   'CREATE TABLE OPTIONS':
     'prefix': 'create table options'
     'body': """
-      OPTIONS (
+      options (
       \tdescription = "description",
-      \texpiration_timestamp = TIMESTAMP "YYYY-MM-DD HH:MI:SS UTC",
+      \texpiration_timestamp = timestamp "YYYY-MM-DD HH:MI:SS UTC",
       \tpartition_expiration_days = 1,
       \trequire_partition_filter = false,
       \tkms_key_name = "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]",
@@ -196,9 +196,9 @@
   'OPTIONS':
     'prefix': 'options'
     'body': """
-      OPTIONS (
+      options (
       \tdescription = "description",
-      \texpiration_timestamp = TIMESTAMP "YYYY-MM-DD HH:MI:SS UTC",
+      \texpiration_timestamp = timestamp "YYYY-MM-DD HH:MI:SS UTC",
       \tpartition_expiration_days = 1,
       \trequire_partition_filter = false,
       \tkms_key_name = "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]",
@@ -210,43 +210,43 @@
   'CREATE VIEW':
     'prefix': 'create view'
     'body': """
-      CREATE VIEW `${1:project}.${2:dataset}.${3:view}`
-      AS
-      SELECT
-      FROM `${5:project}.${5:dataset}.${6:table}`
+      create view `${1:project}.${2:dataset}.${3:view}`
+      as
+      select
+      from `${5:project}.${5:dataset}.${6:table}`
     """
   'CREATE VIEW IF NOT EXISTS':
     'prefix': 'create view if not exists'
     'body': """
-      CREATE VIEW IF NOT EXISTS `${1:project}.${2:dataset}.${3:view}`
-      AS
-      SELECT
-      FROM `${5:project}.${5:dataset}.${6:table}`
+      create view if not exists `${1:project}.${2:dataset}.${3:view}`
+      as
+      select
+      from `${5:project}.${5:dataset}.${6:table}`
     """
   'CREATE OR REPLACE VIEW':
     'prefix': 'create or replace view'
     'body': """
-      CREATE OR REPLACE VIEW `${1:project}.${2:dataset}.${3:view}`
-      AS
-      SELECT
-      FROM `${5:project}.${5:dataset}.${6:table}`
+      create or replace view `${1:project}.${2:dataset}.${3:view}`
+      as
+      select
+      from `${5:project}.${5:dataset}.${6:table}`
     """
 
   'CREATE JavaScript FUNCTION':
     'prefix': 'create function javascript'
     'body': """
-      CREATE TEMPORARY FUNCTION ${1:functionName}(${2:param_name param_type[, ...]})
-      RETURNS ${3:data_type}
-      LANGUAGE js AS \"\"\"
+      create temporary function ${1:functionName}(${2:param_name param_type[, ...]})
+      returns ${3:data_type}
+      language js as \"\"\"
       \t${4:return \"expression\";}
       \"\"\";
     """
   'CREATE SQL FUNCTION':
     'prefix': 'create function sql'
     'body': """
-      CREATE TEMPORARY FUNCTION ${1:functionName}(${2:param_name param_type[, ...]})
-      ${3:[RETURNS data_type]}
-      AS (
+      create temporary function ${1:functionName}(${2:param_name param_type[, ...]})
+      ${3:[returns data_type]}
+      as (
       \t${4:sql_expression}
       );
     """
@@ -254,8 +254,8 @@
   'CREATE MODEL':
     'prefix': 'create model'
     'body': """
-      ${1:CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} `${2:project}.${3:dataset}.${4:model}`
-      ${5:[OPTIONS(model_option_list)]}
+      ${1:create model | create model if not exists | create or replace model} `${2:project}.${3:dataset}.${4:model}`
+      ${5:[options(model_option_list)]}
       AS
       ${6:query_statement}
     """
@@ -263,38 +263,38 @@
   'DROP TABLE':
     'prefix': 'drop table'
     'body': """
-      DROP TABLE `${1:project}.${2:dataset}.${3:table}`
+      drop table `${1:project}.${2:dataset}.${3:table}`
     """
   'DROP TABLE IF EXISTS':
     'prefix': 'drop table if exists'
     'body': """
-      DROP TABLE IF EXISTS `${1:project}.${2:dataset}.${3:table}`
+      drop table if exists `${1:project}.${2:dataset}.${3:table}`
     """
 
   'DROP VIEW':
     'prefix': 'drop view'
     'body': """
-      DROP VIEW `${1:project}.${2:dataset}.${3:view}`
+      drop view `${1:project}.${2:dataset}.${3:view}`
     """
   'DROP VIEW IF EXISTS':
     'prefix': 'drop view if exists'
     'body': """
-      DROP VIEW IF EXISTS `${1:project}.${2:dataset}.${3:view}`
+      drop view if exists `${1:project}.${2:dataset}.${3:view}`
     """
 
   'DROP MODEL':
     'prefix': 'drop model'
     'body': """
-      ${1:DROP MODEL | DROP MODEL IF EXISTS} `${2:project}.${3:dataset}.${4:model}`
+      ${1:drop model | drop model if exists} `${2:project}.${3:dataset}.${4:model}`
     """
 
   'ALTER TABLE SET OPTIONS':
     'prefix': 'altertable'
     'body': """
-      ALTER TABLE `${1:project}.${2:dataset}.${3:table}`
-      SET OPTIONS (
+      alter table `${1:project}.${2:dataset}.${3:table}`
+      set options (
       \tdescription = "description",
-      \texpiration_timestamp = TIMESTAMP "YYYY-MM-DD HH:MI:SS UTC",
+      \texpiration_timestamp = timestamp "YYYY-MM-DD HH:MI:SS UTC",
       \tpartition_expiration_days = 1,
       \trequire_partition_filter = false,
       \tkms_key_name = "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]",
@@ -305,10 +305,10 @@
   'ALTER TABLE IF EXISTS SET OPTIONS':
     'prefix': 'altertableifexists'
     'body': """
-      ALTER TABLE IF EXISTS `${1:project}.${2:dataset}.${3:table}`
-      SET OPTIONS (
+      alter table if exists `${1:project}.${2:dataset}.${3:table}`
+      set options (
       \tdescription = "description",
-      \texpiration_timestamp = TIMESTAMP "YYYY-MM-DD HH:MI:SS UTC",
+      \texpiration_timestamp = timestamp "YYYY-MM-DD HH:MI:SS UTC",
       \tpartition_expiration_days = 1,
       \trequire_partition_filter = false,
       \tkms_key_name = "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]",
@@ -320,10 +320,10 @@
   'ALTER VIEW SET OPTIONS':
     'prefix': 'alterview'
     'body': """
-      ALTER VIEW `${1:project}.${2:dataset}.${3:view}`
-      SET OPTIONS (
+      alter view `${1:project}.${2:dataset}.${3:view}`
+      set options (
       \tdescription = "description",
-      \texpiration_timestamp = TIMESTAMP "YYYY-MM-DD HH:MI:SS UTC",
+      \texpiration_timestamp = timestamp "YYYY-MM-DD HH:MI:SS UTC",
       \tfriendly_name = "friendly_name",
       \tlabels = [("key", "value")]
       )
@@ -331,10 +331,10 @@
   'ALTER VIEW IF EXISTS SET OPTIONS':
     'prefix': 'alterviewifexists'
     'body': """
-      ALTER VIEW IF EXISTS `${1:project}.${2:dataset}.${3:view}`
-      SET OPTIONS (
+      alter view if exists `${1:project}.${2:dataset}.${3:view}`
+      set options (
       \tdescription = "description",
-      \texpiration_timestamp = TIMESTAMP "YYYY-MM-DD HH:MI:SS UTC",
+      \texpiration_timestamp = timestamp "YYYY-MM-DD HH:MI:SS UTC",
       \tfriendly_name = "friendly_name",
       \tlabels = [("key", "value")]
       )
@@ -342,110 +342,110 @@
 
   'CAST()':
     'prefix': 'cast'
-    'body': 'CAST(${1:expr} AS ${2:type})'
+    'body': 'cast(${1:expr} as ${2:type})'
     'description': """
       Cast syntax is used in a query to indicate that the result type of an expression should be converted to some other type.
     """
   'SAFE_CAST()':
     'prefix': 'safe_cast'
-    'body': 'SAFE_CAST(${1:expr} AS ${2:type})'
+    'body': 'safe_cast(${1:expr} as ${2:type})'
     'description': """
       SAFE_CAST is identical to CAST, except it returns NULL instead of raising an error.
     """
 
   'ANY_VALUE()':
     'prefix': 'any_value'
-    'body': 'ANY_VALUE(${1:expr}) ${2:[OVER (...)]}'
+    'body': 'any_value(${1:expr}) ${2:[over (...)]}'
     'description': """
       Returns any value from the input or NULL if there are zero input rows. The value returned is non-deterministic, which means you might receive a different result each time you use this function.
     """
   'ARRAY_AGG()':
     'prefix': 'array_agg'
     'body': """
-      ARRAY_AGG(${1:[DISTINCT] expression [{IGNORE|RESPECT\\} NULLS]
-                [ORDER BY key [{ASC|DESC\\}] [, ... ]] [LIMIT n]})
-      ${2:[OVER (...)]}
+      array_agg(${1:[distinct] expression [{ignore|respect\\} nulls]
+                [order by key [{asc|desc\\}] [, ... ]] [limit n]})
+      ${2:[over (...)]}
     """
     'description': """
       Returns an ARRAY of `expression` values.
     """
   'ARRAY_CONCAT_AGG()':
     'prefix': 'array_concat_agg'
-    'body': 'ARRAY_CONCAT_AGG(${1:expression [ORDER BY key [{ASC|DESC\\}] [, ... ]] [LIMIT n]})'
+    'body': 'array_concat_agg(${1:expression [order by key [{asc|desc\\}] [, ... ]] [limit n]})'
     'description': """
       Concatenates elements from `expression` of type ARRAY, returning a single ARRAY as a result. This function ignores NULL input arrays, but respects the NULL elements in non-NULL input arrays (an error is raised, however, if an array in the final query result contains a NULL element).
     """
   'AVG()':
     'prefix': 'avg'
-    'body': 'AVG(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'avg(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       Returns the average of non-NULL input values, or NaN if the input contains a NaN.
     """
   'BIT_AND()':
     'prefix': 'bit_and'
-    'body': 'BIT_AND(${1:expression})'
+    'body': 'bit_and(${1:expression})'
     'description': """
       Performs a bitwise AND operation on `expression` and returns the result.
     """
   'BIT_OR()':
     'prefix': 'bit_or'
-    'body': 'BIT_OR(${1:expression})'
+    'body': 'bit_or(${1:expression})'
     'description': """
       Performs a bitwise OR operation on `expression` and returns the result.
     """
   'BIT_XOR()':
     'prefix': 'bit_xor'
-    'body': 'BIT_XOR(${1:expression})'
+    'body': 'bit_xor(${1:expression})'
     'description': """
       Performs a bitwise XOR operation on `expression` and returns the result.
     """
   'COUNT(*)':
     'prefix': 'count'
-    'body': 'COUNT(*)'
+    'body': 'count(*)'
     'description': """
       Returns the number of rows in the input.
     """
   'COUNT(expr)':
     'prefix': 'count expr'
-    'body': 'COUNT(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'count(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       Returns the number of rows with `expression` evaluated to any value other than NULL.
     """
   'COUNTIF()':
     'prefix': 'countif'
-    'body': 'COUNTIF(${1:expression}) ${2:[OVER (...)]}'
+    'body': 'countif(${1:expression}) ${2:[over (...)]}'
     'description': """
       Returns the count of TRUE values for `expression`. Returns 0 if there are zero input rows or `expression` evaluates to FALSE for all rows.
     """
   'LOGICAL_AND()':
     'prefix': 'logical_and'
-    'body': 'LOGICAL_AND(${1:expression})'
+    'body': 'logical_and(${1:expression})'
     'description': """
       Returns the logical AND of all non-NULL expressions. Returns NULL if there are zero input rows or `expression` evaluates to NULL for all rows.
     """
   'LOGICAL_OR()':
     'prefix': 'logical_or'
-    'body': 'LOGICAL_OR(${1:expression})'
+    'body': 'logical_or(${1:expression})'
     'description': """
       Returns the logical OR of all non-NULL expressions. Returns NULL if there are zero input rows or `expression` evaluates to NULL for all rows.
     """
   'MAX()':
     'prefix': 'max'
-    'body': 'MAX(${1:expression}) ${2:[OVER (...)]}'
+    'body': 'max(${1:expression}) ${2:[over (...)]}'
     'description': """
       Returns the maximum value of non-NULL expressions. Returns NULL if there are zero input rows or `expression` evaluates to NULL for all rows. Returns NaN if the input contains a NaN.
     """
   'MIN()':
     'prefix': 'min'
-    'body': 'MIN(${1:expression}) ${2:[OVER (...)]}'
+    'body': 'min(${1:expression}) ${2:[over (...)]}'
     'description': """
       Returns the minimum value of non-NULL expressions. Returns NULL if there are zero input rows or `expression` evaluates to NULL for all rows. Returns NaN if the input contains a NaN.
     """
   'STRING_AGG()':
     'prefix': 'string_agg'
     'body': """
-      STRING_AGG(${1:[DISTINCT] expression [, delimiter] [ORDER BY key [{ASC|DESC\\}] [, ... ]] [LIMIT n]})
-      ${2:[OVER (...)]}
+      string_agg(${1:[distinct] expression [, delimiter] [order by key [{asc|desc\\}] [, ... ]] [limit n]})
+      ${2:[over (...)]}
     """
     'description': """
       Returns a value (either STRING or BYTES) obtained by concatenating non-null values.
@@ -454,7 +454,7 @@
     """
   'SUM()':
     'prefix': 'sum'
-    'body': 'SUM(${1:expression}) ${2:[OVER (...)]}'
+    'body': 'sum(${1:expression}) ${2:[over (...)]}'
     'description': """
       Returns the sum of non-null values.
 
@@ -463,7 +463,7 @@
 
   'CORR()':
     'prefix': 'corr'
-    'body': 'CORR(${1:X1}, ${2:X2}) ${3:[OVER (...)]}'
+    'body': 'corr(${1:X1}, ${2:X2}) ${3:[over (...)]}'
     'description': """
       Returns the Pearson coefficient of correlation of a set of number pairs. For each number pair, the first number is the dependent variable and the second number is the independent variable. The return result is between `-1` and `1`. A result of `0` indicates no correlation.
 
@@ -471,7 +471,7 @@
     """
   'COVAR_POP()':
     'prefix': 'covar_pop'
-    'body': 'COVAR_POP(${1:X1}, ${2:X2}) ${3:[OVER (...)]}'
+    'body': 'covar_pop(${1:X1}, ${2:X2}) ${3:[over (...)]}'
     'description': """
       Returns the population covariance of a set of number pairs. The first number is the dependent variable; the second number is the independent variable. The return result is between `-Inf` and `+Inf`.
 
@@ -479,7 +479,7 @@
     """
   'COVAR_SAMP()':
     'prefix': 'covar_samp'
-    'body': 'COVAR_SAMP(${1:X1}, ${2:X2}) ${3:[OVER (...)]}'
+    'body': 'covar_samp(${1:X1}, ${2:X2}) ${3:[over (...)]}'
     'description': """
       Returns the sample covariance of a set of number pairs. The first number is the dependent variable; the second number is the independent variable. The return result is between `-Inf` and `+Inf`.
 
@@ -487,7 +487,7 @@
     """
   'STDDEV_POP()':
     'prefix': 'stddev_pop'
-    'body': 'STDDEV_POP(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'stddev_pop(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       Returns the population (biased) standard deviation of the values. The return result is between `0` and `+Inf`.
 
@@ -497,7 +497,7 @@
     """
   'STDDEV_SAMP()':
     'prefix': 'stddev_samp'
-    'body': 'STDDEV_SAMP(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'stddev_samp(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       Returns the sample (unbiased) standard deviation of the values. The return result is between `0` and `+Inf`.
 
@@ -505,13 +505,13 @@
     """
   'STDDEV()':
     'prefix': 'stddev'
-    'body': 'STDDEV(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'stdev(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       An alias of STDDEV_SAMP.
     """
   'VAR_POP()':
     'prefix': 'var_pop'
-    'body': 'VAR_POP(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'var_pop(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       Returns the population (biased) variance of the values. The return result is between `0` and `+Inf`.
 
@@ -521,7 +521,7 @@
     """
   'VAR_SAMP()':
     'prefix': 'var_samp'
-    'body': 'VAR_SAMP(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'var_samp(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       Returns the sample (unbiased) variance of the values. The return result is between `0` and `+Inf`.
 
@@ -529,14 +529,14 @@
     """
   'VARIANCE()':
     'prefix': 'variance'
-    'body': 'VARIANCE(${1:[DISTINCT] expression}) ${2:[OVER (...)]}'
+    'body': 'variance(${1:[distinct] expression}) ${2:[over (...)]}'
     'description': """
       An alias of VAR_SAMP.
     """
 
   'APPROX_COUNT_DISTINCT()':
     'prefix': 'approx_count_distinct'
-    'body': 'APPROX_COUNT_DISTINCT(${1:expression})'
+    'body': 'approx_count_distinct(${1:expression})'
     'description': """
       Returns the approximate result for `COUNT(DISTINCT expression)`. The value returned is a statistical estimate—not necessarily the actual value.
 
@@ -544,15 +544,15 @@
     """
   'APPROX_QUANTILES()':
     'prefix': 'approx_quantiles'
-    'body': 'APPROX_QUANTILES(${1:[DISTINCT] expression, number [{IGNORE|RESPECT\\} NULLS]})'
+    'body': 'approx_quantiles(${1:[distinct] expression, number [{ignore|respect\\} nulls]})'
     'description': 'Returns the approximate boundaries for a group of `expression` values, where `number` represents the number of quantiles to create. This function returns an array of `number` + 1 elements, where the first element is the approximate minimum and the last element is the approximate maximum.'
   'APPROX_TOP_COUNT()':
     'prefix': 'approx_top_count'
-    'body': 'APPROX_TOP_COUNT(${1:expression}, ${2:number})'
+    'body': 'approx_top_count(${1:expression}, ${2:number})'
     'description': 'Returns the approximate top elements of `expression`. The `number` parameter specifies the number of elements returned.'
   'APPROX_TOP_SUM()':
     'prefix': 'approx_top_sum'
-    'body': 'APPROX_TOP_SUM(${1:expression}, ${2:weight}, ${3:number})'
+    'body': 'approx_top_sum(${1:expression}, ${2:weight}, ${3:number})'
     'description': """
       Returns the approximate top elements of `expression`, based on the sum of an assigned `weight`. The `number` parameter specifies the number of elements returned.
 
@@ -561,13 +561,13 @@
 
   'HLL_COUNT.INIT()':
     'prefix': 'hll_count.init'
-    'body': 'HLL_COUNT.INIT(${1:input [, precision]})'
+    'body': 'hll_count.init(${1:input [, precision]})'
     'description': """
       A scalar function that takes one or more input values and aggregates them into a HyperLogLog++ sketch. Each sketch is represented using the BYTES data type. You can then merge these sketches using HLL_COUNT.MERGE or HLL_COUNT.MERGE_PARTIAL, or if no merging is needed, converted to the final count of distinct values using HLL_COUNT.EXTRACT.
     """
   'HLL_COUNT.MERGE()':
     'prefix': 'hll_count.merge'
-    'body': 'HLL_COUNT.MERGE(${1:sketch})'
+    'body': 'hll_count.merge(${1:sketch})'
     'description': """
       An aggregate function that returns the cardinality of several HyperLogLog++ set sketches by computing their union.
 
@@ -577,7 +577,7 @@
     """
   'HLL_COUNT.MERGE_PARTIAL()':
     'prefix': 'hll_count.merge_partial'
-    'body': 'HLL_COUNT.MERGE_PARTIAL(${1:sketch})'
+    'body': 'hll_count.merge_partial(${1:sketch})'
     'description': """
       An aggregate function that takes one or more HyperLogLog++ `sketch` inputs and merges them into a new sketch. This function is useful if you want to reduce a table that already contains sketches, but do not yet want to estimate the cardinality. For example, use this function if you want to create a sketch that you will merge further later.
 
@@ -585,7 +585,7 @@
     """
   'HLL_COUNT.EXTRACT()':
     'prefix': 'hll_count.extract'
-    'body': 'HLL_COUNT.EXTRACT(${1:sketch})'
+    'body': 'hll_count.extract(${1:sketch})'
     'description': """
       A scalar function that extracts an cardinality estimate of a single HyperLogLog++ sketch.
 
@@ -594,43 +594,43 @@
 
   'RANK()':
     'prefix': 'rank'
-    'body': 'RANK()'
+    'body': 'rank()'
     'description': """
       Returns the ordinal (1-based) rank of each row within the ordered partition. All peer rows receive the same rank value. The next row or set of peer rows receives a rank value which increments by the number of peers with the previous rank value, instead of a rank value which always increments by 1. See example of `RANK()` below this table.
     """
   'DENSE_RANK()':
     'prefix': 'dense_rank'
-    'body': 'DENSE_RANK()'
+    'body': 'dense_rank()'
     'description': """
       Returns the ordinal (1-based) rank of each row within the window partition. All peer rows receive the same rank value, and the subsequent rank value is incremented by one.
     """
   'PERCENT_RANK()':
     'prefix': 'percent_rank'
-    'body': 'PERCENT_RANK()'
+    'body': 'percent_rank()'
     'description': """
       Return the percentile rank of a row defined as (RK-1)/(NR-1), where RK is the `RANK` of the row and NR is the number of rows in the partition. Returns 0 if NR=1.
     """
   'CUME_DIST()':
     'prefix': 'cume_dist'
-    'body': 'CUME_DIST()'
+    'body': 'cume_dist()'
     'description': """
       Return the relative rank of a row defined as NP/NR. NP is defined to be the number of rows that either precede or are peers with the current row. NR is the number of rows in the partition.
     """
   'NTILE()':
     'prefix': 'ntile'
-    'body': 'NTILE(${1:constant_integer_expression})'
+    'body': 'ntile(${1:constant_integer_expression})'
     'description': """
       This function divides the rows into `constant_integer_expression` buckets based on row ordering and returns the 1-based bucket number that is assigned to each row. The number of rows in the buckets can differ by at most 1. The remainder values (the remainder of number of rows divided by buckets) are distributed one for each bucket, starting with bucket 1. If `constant_integer_expression` evaluates to NULL, 0 or negative, an error is provided.
     """
   'ROW_NUMBER()':
     'prefix': 'row_number'
-    'body': 'ROW_NUMBER()'
+    'body': 'row_number()'
     'description': """
       Does not require the `ORDER BY` clause. Returns the sequential row ordinal (1-based) of each row for each ordered partition. If the `ORDER BY` clause is unspecified then the result is non-deterministic.
     """
   'FIRST_VALUE()':
     'prefix': 'first_value'
-    'body': 'FIRST_VALUE(${1:value_expression [{RESPECT | IGNORE\\} NULLS]})'
+    'body': 'first_value(${1:value_expression [{respect | ignore\\} nulls]})'
     'description': """
       Returns the value of the `value_expression` for the first row in the current window frame.
 
@@ -638,7 +638,7 @@
     """
   'LAST_VALUE()':
     'prefix': 'last_value'
-    'body': 'LAST_VALUE(${1:value_expression [{RESPECT | IGNORE\\} NULLS]})'
+    'body': 'last_value(${1:value_expression [{respect | ignore\\} nulls]})'
     'description': """
       Returns the value of the `value_expression` for the last row in the current window frame.
 
@@ -646,7 +646,7 @@
     """
   'NTH_VALUE()':
     'prefix': 'nth_value'
-    'body': 'NTH_VALUE(${1:value_expression, constant_integer_expression [{RESPECT | IGNORE\\} NULLS]})'
+    'body': 'nth_value(${1:value_expression, constant_integer_expression [{respect | ignore\\} nulls]})'
     'description': """
       Returns the value of `value_expression` at the Nth row of the current window frame, where Nth is defined by `constant_integer_expression`. Returns NULL if there is no such row.
 
@@ -654,7 +654,7 @@
     """
   'LEAD()':
     'prefix': 'lead'
-    'body': 'LEAD(${1:value_expression, [, offset [, default_expression]]})'
+    'body': 'lead(${1:value_expression, [, offset [, default_expression]]})'
     'description': """
       Returns the value of the `value_expression` on a subsequent row. Changing the `offset` value changes which subsequent row is returned; the default value is `1`, indicating the next row in the window frame. An error occurs if `offset` is `NULL` or a negative value.
 
@@ -662,7 +662,7 @@
     """
   'LAG()':
     'prefix': 'lag'
-    'body': 'LAG(${1:value_expression, [, offset [, default_expression]]})'
+    'body': 'lag(${1:value_expression, [, offset [, default_expression]]})'
     'description': """
       Returns the value of the `value_expression` on a preceding row. Changing the `offset` value changes which preceding row is returned; the default value is `1`, indicating the previous row in the window frame. An error occurs if `offset` is NULL or a negative value.
 
@@ -670,7 +670,7 @@
     """
   'PERCENTILE_CONT()':
     'prefix': 'percentile_cont'
-    'body': 'PERCENTILE_CONT(${1:value_expression, percentile [{RESPECT | IGNORE\\} NULLS]})'
+    'body': 'percentile_cont(${1:value_expression, percentile [{respect | ignore\\} nulls]})'
     'description': """
       Computes the specified percentile value for the value_expression, with linear interpolation.
 
@@ -681,7 +681,7 @@
     """
   'PERCENTILE_DISC()':
     'prefix': 'percentile_disc'
-    'body': 'PERCENTILE_DISC(${1:value_expression, percentile [{RESPECT | IGNORE\\} NULLS]})'
+    'body': 'percentile_disc(${1:value_expression, percentile [{respect | ignore\\} nulls]})'
     'description': """
       Computes the specified percentile value for a discrete `value_expression`. The returned value is the first sorted value of `value_expression` with cumulative distribution greater than or equal to the given `percentile` value.
 
@@ -690,7 +690,7 @@
 
   'BIT_COUNT()':
     'prefix': 'bit_count'
-    'body': 'BIT_COUNT(${1:expression})'
+    'body': 'bit_count(${1:expression})'
     'description': """
       The input, `expression`, must be an integer or BYTES.
 
@@ -699,31 +699,31 @@
 
   'ABS()':
     'prefix': 'abs'
-    'body': 'ABS(${1:X})'
+    'body': 'abs(${1:X})'
     'description': """
       Computes absolute value. With integer argument, generates an error if the value cannot be represented as the same type (which happens only for the largest negative input value, which has no positive representation). Returns `+inf` for `+/-inf` argument.
     """
   'SIGN()':
     'prefix': 'sign'
-    'body': 'SIGN(${1:X})'
+    'body': 'sign(${1:X})'
     'description': """
       Returns -1, 0, or +1 for negative, zero and positive argument respectively. With floating point argument does not distinguish positive and negative zero. Returns `NaN` for `NaN` argument.
     """
   'IS_INF()':
     'prefix': 'is_inf'
-    'body': 'IS_INF(${1:X})'
+    'body': 'is_inf(${1:X})'
     'description': """
       Return TRUE if the value is positive or negative infinity. Returns `NULL` for `NULL` inputs.
     """
   'IS_NAN()':
     'prefix': 'is_nan'
-    'body': 'IS_NAN(${1:X})'
+    'body': 'is_nan(${1:X})'
     'description': """
       Return TRUE if the value is a `NaN` value. Returns `NULL` for `NULL` inputs.
     """
   'IEEE_DIVIDE()':
     'prefix': 'ieee_divide'
-    'body': 'IEEE_DIVIDE(${1:X}, ${2:Y})'
+    'body': 'ieee_divide(${1:X}, ${2:Y})'
     'description': """
       Divides X by Y; never fails. Returns FLOAT64. Unlike division operator (/), does not generate errors for division by zero or overflow.
 
@@ -738,116 +738,116 @@
     """
   'RAND()':
     'prefix': 'rand'
-    'body': 'RAND()'
+    'body': 'rand()'
     'description': """
       Generates a pseudo-random value of type FLOAT64 in the range of [0, 1), inclusive of 0 and exclusive of 1.
     """
   'SQRT()':
     'prefix': 'sqrt'
-    'body': 'SQRT(${1:X})'
+    'body': 'sqrt(${1:X})'
     'description': """
       Computes the square root of X. Generates an error if X less than 0. Returns `+inf` if X is `+inf`.
     """
   'POW()':
     'prefix': 'pow'
-    'body': 'POW(${1:X}, ${2:Y})'
+    'body': 'pow(${1:X}, ${2:Y})'
     'description': """
       Power function: returns the value of X raised to the power of Y. If the result underflows and is not representable then zero value is returned. An error can be generated if one of the following is true:X is a finite value less than 0 and Y is a noninteger,if X is 0, and Y is a finite value less than 0,the result overflows.The behavior of POW() is further illustrated in the table below.
     """
   'POWER()':
     'prefix': 'power'
-    'body': 'POWER(${1:X}, ${2:Y})'
+    'body': 'power(${1:X}, ${2:Y})'
     'description': """
       Synonym of POW(). The behavior of POWER() is further illustrated in the table below.
     """
   'EXP()':
     'prefix': 'exp'
-    'body': 'EXP(${1:X})'
+    'body': 'exp(${1:X})'
     'description': """
       Computes natural exponential function ex. If the result underflows a zero is returned. Generates an error if the result overflows. If X is `+/-inf`, then `+inf` (or 0) is returned.
     """
   'LN()':
     'prefix': 'ln'
-    'body': 'LN(${1:X})'
+    'body': 'ln(${1:X})'
     'description': """
       Computes the natural logarithm of X. Generates an error if X is less or equal zero. If X is `+inf`, then `+inf` is returned.
     """
   'LOG(X)':
     'prefix': 'logln'
-    'body': 'LOG(${1:X})'
+    'body': 'logln(${1:X})'
     'description': """
       Synonym of LN(X)
     """
   'LOG(X, Y)':
     'prefix': 'log'
-    'body': 'LOG(${1:X}, ${2:Y})'
+    'body': 'log(${1:X}, ${2:Y})'
     'description': """
       Computes logarithm of X to base Y. Generates an error if:X less or equal zero,Y is 1.0,Y less or equal zero.The behavior of LOG(X, Y) is further illustrated in the table below.
     """
   'LOG10()':
     'prefix': 'log10'
-    'body': 'LOG10(${1:X})'
+    'body': 'log10(${1:X})'
     'description': """
       Similar to LOG(X) but computes logarithm to base 10.
     """
   'GREATEST()':
     'prefix': 'greatest'
-    'body': 'GREATEST(${1:X1,...,XN})'
+    'body': 'greatest(${1:X1,...,XN})'
     'description': """
       Returns `NULL` if any of the inputs is `NULL`. Otherwise, returns `NaN` if any of the inputs is `NaN`. Otherwise, returns the largest value among X1,...,XN according to the < comparison.
     """
   'LEAST()':
     'prefix': 'least'
-    'body': 'LEAST(${1:X1,...,XN})'
+    'body': 'least(${1:X1,...,XN})'
     'description': """
       Returns `NULL` if any of the inputs is `NULL`. Otherwise, returns `NaN` if any of the inputs is `NaN`. Otherwise, returns the smallest value among X1,...,XN according to the > comparison.
     """
   'DIV()':
     'prefix': 'div'
-    'body': 'DIV(${1:X}, ${2:Y})'
+    'body': 'div(${1:X}, ${2:Y})'
     'description': """
       Returns the result of integer division of X by Y. Division by zero returns an error. Division by -1 may overflow. See the table below for possible result types.
     """
   'SAFE_DIVIDE()':
     'prefix': 'safe_divide'
-    'body': 'SAFE_DIVIDE(${1:X}, ${2:Y})'
+    'body': 'safe_divide(${1:X}, ${2:Y})'
     'description': """
       Equivalent to the division operator (`/`). Returns `NULL` if an error occurs, such as division by zero.
     """
   'MOD()':
     'prefix': 'mod'
-    'body': 'MOD(${1:X}, ${2:Y})'
+    'body': 'mod(${1:X}, ${2:Y})'
     'description': """
       Modulo function: returns the remainder of the division of X by Y. Returned value has the same sign as X. An error is generated if Y is 0. See the table below for possible result types.
     """
 
   'COS()':
     'prefix': 'cos'
-    'body': 'COS(${1:X})'
+    'body': 'cos(${1:X})'
     'description': """
       Computes cosine of X. Never fails.
     """
   'COSH()':
     'prefix': 'cosh'
-    'body': 'COSH(${1:X})'
+    'body': 'cosh(${1:X})'
     'description': """
       Computes the hyperbolic cosine of X. Generates an error if an overflow occurs.
     """
   'ACOS()':
     'prefix': 'acos'
-    'body': 'ACOS(${1:X})'
+    'body': 'acos(${1:X})'
     'description': """
       Computes the principal value of the arc cosine of X. The return value is in the range [0,]. Generates an error if X is a finite value outside of range [-1, 1].
     """
   'ACOSH()':
     'prefix': 'acosh'
-    'body': 'ACOSH(${1:X})'
+    'body': 'acosh(${1:X})'
     'description': """
       Computes the inverse hyperbolic cosine of X. Generates an error if X is a finite value less than 1.
     """
   'SIN()':
     'prefix': 'sin'
-    'body': 'SIN(${1:X})'
+    'body': 'sin(${1:X})'
     'description': """
       Computes the sine of X. Never fails.
     """
@@ -859,57 +859,57 @@
     """
   'ASIN()':
     'prefix': 'asin'
-    'body': 'ASIN(${1:X})'
+    'body': 'asin(${1:X})'
     'description': """
       Computes the principal value of the arc sine of X. The return value is in the range [-π/2,π/2]. Generates an error if X is a finite value outside of range [-1, 1].
     """
   'ASINH()':
     'prefix': 'asinh'
-    'body': 'ASINH(${1:X})'
+    'body': 'asinh(${1:X})'
     'description': """
       Computes the inverse hyperbolic sine of X. Does not fail.
     """
   'TAN()':
     'prefix': 'tan'
-    'body': 'TAN(${1:X})'
+    'body': 'tan(${1:X})'
     'description': """
       Computes tangent of X. Generates an error if an overflow occurs.
     """
   'TANH()':
     'prefix': 'tanh'
-    'body': 'TANH(${1:X})'
+    'body': 'tanh(${1:X})'
     'description': """
       Computes hyperbolic tangent of X. Does not fail.
     """
   'ATAN()':
     'prefix': 'atan'
-    'body': 'ATAN(${1:X})'
+    'body': 'atan(${1:X})'
     'description': """
       Computes the principal value of the arc tangent of X. The return value is in the range [-π/2,π/2]. Does not fail.
     """
   'ATANH()':
     'prefix': 'atanh'
-    'body': 'ATANH(${1:X})'
+    'body': 'atanh(${1:X})'
     'description': """
       Computes the inverse hyperbolic tangent of X. Generates an error if the absolute value of X is greater or equal 1.
     """
   'ATAN2()':
     'prefix': 'atan2'
-    'body': 'ATAN2(${1:X}, ${2:Y})'
+    'body': 'atan2(${1:X}, ${2:Y})'
     'description': """
       Calculates the principal value of the arc tangent of Y/X using the signs of the two arguments to determine the quadrant. The return value is in the range [-π,π]. The behavior of this function is further illustrated in the table below.
     """
 
   'FARM_FINGERPRINT()':
     'prefix': 'farm_fingerprint'
-    'body': 'FARM_FINGERPRINT(${1:value})'
+    'body': 'farm_fingerprint(${1:value})'
     'type': 'function'
     'description': """
       Computes the fingerprint of the STRING or BYTES input using the Fingerprint64 function from the open-source FarmHash library. The output of this function for a particular input will never change.
     """
   'MD5()':
     'prefix': 'md5'
-    'body': 'MD5(${1:input})'
+    'body': 'md5(${1:input})'
     'description': """
       Computes the hash of the input using the MD5 algorithm. The input can either be STRING or BYTES. The string version treats the input as an array of bytes.
 
@@ -917,7 +917,7 @@
     """
   'SHA1()':
     'prefix': 'sha1'
-    'body': 'SHA1(${1:input})'
+    'body': 'sha1(${1:input})'
     'description': """
       Computes the hash of the input using the SHA-1 algorithm. The input can either be STRING or BYTES. The string version treats the input as an array of bytes.
 
@@ -925,7 +925,7 @@
     """
   'SHA256()':
     'prefix': 'sha256'
-    'body': 'SHA256(${1:input})'
+    'body': 'sha256(${1:input})'
     'description': """
       Computes the hash of the input using the SHA-256 algorithm. The input can either be STRING or BYTES. The string version treats the input as an array of bytes.
 
@@ -933,7 +933,7 @@
     """
   'SHA512()':
     'prefix': 'sha512'
-    'body': 'SHA512(${1:input})'
+    'body': 'sha512(${1:input})'
     'description': """
       Computes the hash of the input using the SHA-512 algorithm. The input can either be STRING or BYTES. The string version treats the input as an array of bytes.
 
@@ -942,25 +942,25 @@
 
   'BYTE_LENGTH()':
     'prefix': 'byte_length'
-    'body': 'BYTE_LENGTH(${1:value})'
+    'body': 'byte_length(${1:value})'
     'description': """
       Returns the length of the value in bytes, regardless of whether the type of the value is STRING or BYTES.
     """
   'CHAR_LENGTH()':
     'prefix': 'char_length'
-    'body': 'CHAR_LENGTH(${1:value})'
+    'body': 'char_length(${1:value})'
     'description': """
       Returns the length of the STRING in characters.
     """
   'CHARACTER_LENGTH()':
     'prefix': 'character_length'
-    'body': 'CHARACTER_LENGTH(${1:value})'
+    'body': 'character_length(${1:value})'
     'description': """
       Synonym for CHAR_LENGTH.
     """
   'CODE_POINTS_TO_BYTES()':
     'prefix': 'code_points_to_bytes'
-    'body': 'CODE_POINTS_TO_BYTES(${1:ascii_values})'
+    'body': 'code_points_to_bytes(${1:ascii_values})'
     'description': """
       Takes an array of extended ASCII code points (ARRAY of INT64) and returns BYTES.
 
@@ -968,7 +968,7 @@
     """
   'CODE_POINTS_TO_STRING()':
     'prefix': 'code_points_to_string'
-    'body': 'CODE_POINTS_TO_STRING(${1:value})'
+    'body': 'code_points_to_string(${1:value})'
     'description': """
       Takes an array of Unicode code points (ARRAY of INT64) and returns a STRING.
 
@@ -976,49 +976,49 @@
     """
   'CONCAT()':
     'prefix': 'concat'
-    'body': 'CONCAT(${1:value1[, ...]})'
+    'body': 'concat(${1:value1[, ...]})'
     'description': """
       Concatenates one or more values into a single result.
     """
   'ENDS_WITH()':
     'prefix': 'ends_with'
-    'body': 'ENDS_WITH(${1:value1}, ${2:value2})'
+    'body': 'ends_with(${1:value1}, ${2:value2})'
     'description': """
       Takes two values. Returns TRUE if the second value is a suffix of the first.
     """
   'FORMAT()':
     'prefix': 'format'
-    'body': 'FORMAT(${1:<format_string>, ...})'
+    'body': 'format(${1:<format_string>, ...})'
     'description': """
       BigQuery supports a FORMAT() function for formatting strings. This function is similar to the C printf function. It produces a STRING from a format string that contains zero or more format specifiers, along with a variable length list of additional arguments that matches the format specifiers.
     """
   'FROM_BASE32()':
     'prefix': 'from_base32'
-    'body': 'FROM_BASE32(${1:string_expr})'
+    'body': 'from_base32(${1:string_expr})'
     'description': """
       Converts the base32-encoded input `string_expr` into BYTES format. To convert BYTES to a base32-encoded STRING, use TO_BASE32.
     """
   'FROM_BASE64()':
     'prefix': 'from_base64'
-    'body': 'FROM_BASE64(${1:string_expr})'
+    'body': 'from_base64(${1:string_expr})'
     'description': """
       Converts the base64-encoded input `string_expr` into BYTES format. To convert BYTES to a base64-encoded STRING, use TO_BASE64.
     """
   'FROM_HEX()':
     'prefix': 'from_hex'
-    'body': 'FROM_HEX(${1:string})'
+    'body': 'from_hex(${1:string})'
     'description': """
       Converts a hexadecimal-encoded STRING into BYTES format. Returns an error if the input STRING contains characters outside the range (0..9, A..F, a..f). The lettercase of the characters does not matter. To convert BYTES to a hexadecimal-encoded STRING, use TO_HEX.
     """
   'LENGTH()':
     'prefix': 'length'
-    'body': 'LENGTH(${1:value})'
+    'body': 'length(${1:value})'
     'description': """
       Returns the length of the value. The returned value is in characters for STRING arguments and in bytes for the BYTES argument.
     """
   'LPAD()':
     'prefix': 'lpad'
-    'body': 'LPAD(${1:original_value}, ${2:return_length[, pattern]})'
+    'body': 'lpad(${1:original_value}, ${2:return_length[, pattern]})'
     'description': """
       Returns a value that consists of `original_value` prepended with `pattern`. The `return_length` is an INT64 that specifies the length of the returned value. If `original_value` is BYTES, `return_length` is the number of bytes. If `original_value` is STRING, `return_length` is the number of characters.
 
@@ -1026,7 +1026,7 @@
     """
   'LOWER()':
     'prefix': 'lower'
-    'body': 'LOWER(${1:value})'
+    'body': 'lower(${1:value})'
     'description': """
       For STRING arguments, returns the original string with all alphabetic characters in lowercase. Mapping between lowercase and uppercase is done according to the Unicode Character Database without taking into account language-specific mappings.
 
@@ -1034,13 +1034,13 @@
     """
   'LTRIM()':
     'prefix': 'ltrim'
-    'body': 'LTRIM(${1:value1[, value2]})'
+    'body': 'ltrim(${1:value1[, value2]})'
     'description': """
       Identical to TRIM, but only removes leading characters.
     """
   'NORMALIZE()':
     'prefix': 'normalize'
-    'body': 'NORMALIZE(${1:value[, normalization_mode]})'
+    'body': 'normalize(${1:value[, normalization_mode]})'
     'description': """
       Takes a STRING, `value`, and returns it as a normalized string.
 
@@ -1048,13 +1048,13 @@
     """
   'NORMALIZE_AND_CASEFOLD()':
     'prefix': 'normalize_and_casefold'
-    'body': 'NORMALIZE_AND_CASEFOLD(${1:value[, normalization_mode]})'
+    'body': 'normalize_and_casefold(${1:value[, normalization_mode]})'
     'description': """
       Takes a STRING, `value`, and performs the same actions as NORMALIZE, as well as casefolding for case-insensitive operations.
     """
   'REGEXP_CONTAINS()':
     'prefix': 'regexp_contains'
-    'body': 'REGEXP_CONTAINS(${1:value}, r"${2:regex}")'
+    'body': 'regexp_contains(${1:value}, r"${2:regex}")'
     'description': """
       Returns TRUE if `value` is a partial match for the regular expression, `regex`. You can search for a full match by using ^ (beginning of text) and $ (end of text).
 
@@ -1064,7 +1064,7 @@
     """
   'REGEXP_EXTRACT()':
     'prefix': 'regexp_extract'
-    'body': 'REGEXP_EXTRACT(${1:value}, r"${2:regex}")'
+    'body': 'regexp_extract(${1:value}, r"${2:regex}")'
     'description': """
       Returns the first substring in `value` that matches the regular expression, `regex`. Returns NULL if there is no match.
 
@@ -1072,7 +1072,7 @@
     """
   'REGEXP_EXTRACT_ALL()':
     'prefix': 'regexp_extract_all'
-    'body': 'REGEXP_EXTRACT_ALL(${1:value}, r"${2:regex}")'
+    'body': 'regexp_extract_all(${1:value}, r"${2:regex}")'
     'description': """
       Returns an array of all substrings of `value` that match the regular expression, `regex`.
 
@@ -1082,7 +1082,7 @@
     """
   'REGEXP_REPLACE()':
     'prefix': 'regexp_replace'
-    'body': 'REGEXP_REPLACE(${1:value}, r"${2:regex}", ${3:replacement})'
+    'body': 'regexp_replace(${1:value}, r"${2:regex}", ${3:replacement})'
     'description': """
       Returns a STRING where all substrings of `value` that match regular expression `regex` are replaced with `replacement`.
 
@@ -1090,13 +1090,13 @@
     """
   'REPLACE()':
     'prefix': 'replace'
-    'body': 'REPLACE(${1:original_value}, ${2:from_value}, ${3:to_value})'
+    'body': 'replace(${1:original_value}, ${2:from_value}, ${3:to_value})'
     'description': """
       Replaces all occurrences of `from_value` with `to_value` in `original_value`. If from_value is empty, no replacement is made.
     """
   'REPEAT()':
     'prefix': 'repeat'
-    'body': 'REPEAT(${1:original_value}, ${2:repetitions})'
+    'body': 'repeat(${1:original_value}, ${2:repetitions})'
     'description': """
       Returns a value that consists of `original_value`, repeated. The `repetitions` parameter specifies the number of times to repeat `original_value`. Returns NULL if either `original_value` or `repetitions` are NULL.
 
@@ -1104,13 +1104,13 @@
     """
   'REVERSE()':
     'prefix': 'reverse'
-    'body': 'REVERSE(${1:value})'
+    'body': 'reverse(${1:value})'
     'description': """
       Returns the reverse of the input STRING or BYTES.
     """
   'RPAD()':
     'prefix': 'rpad'
-    'body': 'RPAD(${1:original_value}, ${2:return_length[, pattern]})'
+    'body': 'rpad(${1:original_value}, ${2:return_length[, pattern]})'
     'description': """
       Returns a value that consists of `original_value` appended with pattern. The `return_length` is an INT64 that specifies the length of the returned value. If `original_value` is BYTES, `return_length` is the number of bytes. If `original_value` is STRING, `return_length` is the number of characters.
 
@@ -1118,19 +1118,19 @@
     """
   'RTRIM()':
     'prefix': 'rtrim'
-    'body': 'RTRIM(${1:value1[, value2]})'
+    'body': 'rtrim(${1:value1[, value2]})'
     'description': """
       Identical to TRIM, but only removes trailing characters.
     """
   'SAFE_CONVERT_BYTES_TO_STRING()':
     'prefix': 'safe_convert_bytes_to_string'
-    'body': 'SAFE_CONVERT_BYTES_TO_STRING(${1:value})'
+    'body': 'safe_convert_bytes_to_string(${1:value})'
     'description': """
       Converts a sequence of bytes to a string. Any invalid UTF-8 characters are replaced with the Unicode replacement character, `U+FFFD`.
     """
   'SPLIT()':
     'prefix': 'split'
-    'body': 'SPLIT(${1:value[, delimiter]})'
+    'body': 'split(${1:value[, delimiter]})'
     'description': """
       Splits `value` using the `delimiter` argument.
 
@@ -1144,19 +1144,19 @@
     """
   'STARTS_WITH()':
     'prefix': 'starts_with'
-    'body': 'STARTS_WITH(${1:value1}, ${2:value2})'
+    'body': 'starts_with(${1:value1}, ${2:value2})'
     'description': """
       Takes two values. Returns TRUE if the second value is a prefix of the first.
     """
   'STRPOS()':
     'prefix': 'strpos'
-    'body': 'STRPOS(${1:string}, ${2:substring})'
+    'body': 'strpos(${1:string}, ${2:substring})'
     'description': """
       Returns the 1-based index of the first occurrence of `substring` inside `string`. Returns 0 if `substring` is not found.
     """
   'SUBSTR()':
     'prefix': 'substr'
-    'body': 'SUBSTR(${1:value}, ${2:position[, length]})'
+    'body': 'substr(${1:value}, ${2:position[, length]})'
     'description': """
       Returns a substring of the supplied `value`. The `position` argument is an integer specifying the starting position of the substring, with position = 1 indicating the first character or byte. The `length` argument is the maximum number of characters for STRING arguments, or bytes for BYTES arguments.
 
@@ -1164,19 +1164,19 @@
     """
   'TO_BASE32()':
     'prefix': 'to_base32'
-    'body': 'TO_BASE32(${1:bytes_expr})'
+    'body': 'to_base32(${1:bytes_expr})'
     'description': """
       Converts a sequence of BYTES into a base32-encoded STRING. To convert a base32-encoded STRING into BYTES, use FROM_BASE32.
     """
   'TO_BASE64()':
     'prefix': 'to_base64'
-    'body': 'TO_BASE64(${1:bytes_expr})'
+    'body': 'to_base64(${1:bytes_expr})'
     'description': """
       Converts a sequence of BYTES into a base64-encoded STRING. To convert a base64-encoded STRING into BYTES, use FROM_BASE64.
     """
   'TO_CODE_POINTS()':
     'prefix': 'to_code_points'
-    'body': 'TO_CODE_POINTS(${1:value})'
+    'body': 'to_code_points(${1:value})'
     'description': """
       Takes a value and returns an array of INT64.
 
@@ -1184,19 +1184,19 @@
     """
   'TO_HEX()':
     'prefix': 'to_hex'
-    'body': 'TO_HEX(${1:bytes})'
+    'body': 'to_hex(${1:bytes})'
     'description': """
       Converts a sequence of BYTES into a hexadecimal STRING. Converts each byte in the STRING as two hexadecimal characters in the range (0..9, a..f). To convert a hexadecimal-encoded STRING to BYTES, use FROM_HEX.
     """
   'TRIM()':
     'prefix': 'trim'
-    'body': 'TRIM(${1:value1[, value2]})'
+    'body': 'trim(${1:value1[, value2]})'
     'description': """
       Removes all leading and trailing characters that match `value2`. If `value2` is not specified, all leading and trailing whitespace characters (as defined by the Unicode standard) are removed. If the first argument is of type BYTES, the second argument is required.
     """
   'UPPER()':
     'prefix': 'upper'
-    'body': 'UPPER(${1:value})'
+    'body': 'upper(${1:value})'
     'description': """
       For STRING arguments, returns the original string with all alphabetic characters in uppercase. Mapping between uppercase and lowercase is done according to the Unicode Character Database without taking into account language-specific mappings.
 
@@ -1205,38 +1205,38 @@
 
   'JSON_EXTRACT()':
     'prefix': 'json_extract'
-    'body': 'JSON_EXTRACT(${1:json_string_expr}, ${2:json_path_string_literal})'
+    'body': 'json_extract(${1:json_string_expr}, ${2:json_path_string_literal})'
     'description': """
       Which returns JSON values as STRINGs.
     """
   'JSON_EXTRACT_SCALAR()':
     'prefix': 'json_extract_scalar'
-    'body': 'JSON_EXTRACT_SCALAR(${1:json_string_expr}, ${2:json_path_string_literal})'
+    'body': 'json_extract_scalar(${1:json_string_expr}, ${2:json_path_string_literal})'
     'description': """
       Which returns scalar JSON values as STRINGs.
     """
   'TO_JSON_STRING()':
     'prefix': 'to_json_string'
-    'body': 'TO_JSON_STRING(${1:value[, pretty_print]})'
+    'body': 'to_json_string(${1:value[, pretty_print]})'
     'description': """
       Returns a JSON-formatted string representation of `value`. This function supports an optional `pretty_print` parameter. If `pretty_print` is present, the returned value is formatted for easy readability.
     """
 
   'ARRAY_CONCAT()':
     'prefix': 'array_concat'
-    'body': 'ARRAY_CONCAT(${1:array_expression_1 [, array_expression_n]})'
+    'body': 'array_concat(${1:array_expression_1 [, array_expression_n]})'
     'description': """
       Concatenates one or more arrays with the same element type into a single array.
     """
   'ARRAY_LENGTH()':
     'prefix': 'array_length'
-    'body': 'ARRAY_LENGTH(${1:array_expression})'
+    'body': 'array_length(${1:array_expression})'
     'description': """
       Returns the size of the array. Returns 0 for an empty array. Returns `NULL` if the `array_expression` is `NULL`.
     """
   'ARRAY_TO_STRING()':
     'prefix': 'array_to_string'
-    'body': 'ARRAY_TO_STRING(${1:array_expression}, ${2:delimiter[, null_text]})'
+    'body': 'array_to_string(${1:array_expression}, ${2:delimiter[, null_text]})'
     'description': """
       Returns a concatenation of the elements in `array_expression` as a STRING. The value for `array_expression` can either be an array of STRING or BYTES data types.
 
@@ -1246,7 +1246,7 @@
     """
   'GENERATE_ARRAY()':
     'prefix': 'generate_array'
-    'body': 'GENERATE_ARRAY(${1:start_expression})'
+    'body': 'generate_array(${1:start_expression})'
     'description': """
       Returns an array of values. The `start_expression` and `end_expression` parameters determine the inclusive start and end of the array.
 
@@ -1263,7 +1263,7 @@
     """
   'GENERATE_DATE_ARRAY()':
     'prefix': 'generate_date_array'
-    'body': 'GENERATE_DATE_ARRAY(${1:start_date}, ${2:end_date[, INTERVAL INT64_expr date_part]})'
+    'body': 'generate_date_array(${1:start_date}, ${2:end_date[, interval INT64_expr date_part]})'
     'description': """
       Returns an array of dates. The `start_date` and `end_date` parameters determine the inclusive start and end of the array.
 
@@ -1280,7 +1280,7 @@
     """
   'GENERATE_TIMESTAMP_ARRAY()':
     'prefix': 'generate_timestamp_array'
-    'body': 'GENERATE_TIMESTAMP_ARRAY(${1:start_timestamp}, ${2:end_timestamp[, INTERVAL step_expression date_part]})'
+    'body': 'generate_timestamp_array(${1:start_timestamp}, ${2:end_timestamp[, interval step_expression date_part]})'
     'description': """
       Returns an `ARRAY` of `TIMESTAMPS` separated by a given interval. The `start_timestamp` and `end_timestamp` parameters determine the inclusive lower and upper bounds of the `ARRAY`.
 
@@ -1295,38 +1295,38 @@
     """
   '[OFFSET(zero_based_offset)]':
     'prefix': 'offset'
-    'body': 'OFFSET(${1:zero_based_offset})'
+    'body': 'offset(${1:zero_based_offset})'
     'description': """
       Accesses an ARRAY element by position and returns the element. `OFFSET` means that the numbering starts at zero, `ORDINAL` means that the numbering starts at one.
     """
   '[ORDINAL(one_based_offset)]':
     'prefix': 'ordinal'
-    'body': 'ORDINAL(${1:one_based_offset})'
+    'body': 'ordinal(${1:one_based_offset})'
     'description': """
       Accesses an ARRAY element by position and returns the element. `OFFSET` means that the numbering starts at zero, `ORDINAL` means that the numbering starts at one.
     """
   'ARRAY_REVERSE()':
     'prefix': 'array_reverse'
-    'body': 'ARRAY_REVERSE(${1:value})'
+    'body': 'array_reverse(${1:value})'
     'description': """
       Returns the input ARRAY with elements in reverse order.
     """
   '[SAFE_OFFSET(zero_based_offset)]':
     'prefix': 'safe_offset'
-    'body': 'SAFE_OFFSET(${1:zero_based_offset})'
+    'body': 'safe_offset(${1:zero_based_offset})'
     'description': """
       Identical to `OFFSET` and `ORDINAL`, except returns `NULL` if the index is out of range.
     """
   '[SAFE_ORDINAL(one_based_offset)]':
     'prefix': 'safe_ordinal'
-    'body': 'SAFE_ORDINAL(${1:one_based_offset})'
+    'body': 'safe_ordinal(${1:one_based_offset})'
     'description': """
       Identical to `OFFSET` and `ORDINAL`, except returns `NULL` if the index is out of range.
     """
 
   'CURRENT_DATE()':
     'prefix': 'current_date'
-    'body': 'CURRENT_DATE(${1:[time_zone]})'
+    'body': 'current_date(${1:[time_zone]})'
     'description': """
       Returns the current date as of the specified or default timezone.
 
@@ -1336,7 +1336,7 @@
     """
   'EXTRACT(part FROM date_expression)':
     'prefix': 'extract date'
-    'body': 'EXTRACT(${1:part} FROM ${2:date_expression})'
+    'body': 'extract(${1:part} from ${2:date_expression})'
     'description': """
       Returns the value corresponding to the specified date part. The `part` must be one of:
 
@@ -1353,19 +1353,19 @@
     """
   'DATE(year, month, day)':
     'prefix': 'date use INT'
-    'body': 'DATE(${1:year}, ${2:month}, ${3:day})'
+    'body': 'date(${1:year}, ${2:month}, ${3:day})'
     'description': """
       Constructs a `DATE` from `INT64` values representing the year, month, and day.
     """
   'DATE(timestamp)':
     'prefix': 'date use TIMESTAMP'
-    'body': 'DATE(${1:timestamp_expression[, timezone]})'
+    'body': 'date(${1:timestamp_expression[, timezone]})'
     'description': """
       Converts a `timestamp_expression` to a `DATE` data type. It supports an optional parameter to specify a timezone. If no timezone is specified, the default timezone, UTC, is used.
     """
   'DATE_ADD()':
     'prefix': 'date_add'
-    'body': 'DATE_ADD(${1:date_expression}, INTERVAL ${2:INT64_expr date_part})'
+    'body': 'date_add(${1:date_expression}, interval ${2:INT64_expr date_part})'
     'description': """
       Adds a specified time interval to a DATE.
 
@@ -1381,7 +1381,7 @@
     """
   'DATE_SUB()':
     'prefix': 'date_sub'
-    'body': 'DATE_SUB(${1:date_expression}, INTERVAL ${2:INT64_expr date_part})'
+    'body': 'date_sub(${1:date_expression}, interval ${2:INT64_expr date_part})'
     'description': """
       Subtracts a specified time interval from a DATE.
 
@@ -1397,7 +1397,7 @@
     """
   'DATE_DIFF()':
     'prefix': 'date_diff'
-    'body': 'DATE_DIFF(${1:date_expression}, ${2:date_expression}, ${3:date_part})'
+    'body': 'date_diff(${1:date_expression}, ${2:date_expression}, ${3:date_part})'
     'description': """
       Returns the number of `date_part` boundaries between the two `date_expression`s. If the first date occurs before the second date, then the result is non-positive.
 
@@ -1413,7 +1413,7 @@
     """
   'DATE_TRUNC()':
     'prefix': 'date_trunc'
-    'body': 'DATE_TRUNC(${1:date_expression}, ${2:date_part})'
+    'body': 'date_trunc(${1:date_expression}, ${2:date_part})'
     'description': """
       Truncates the date to the specified granularity.
 
@@ -1430,13 +1430,13 @@
     """
   'DATE_FROM_UNIX_DATE()':
     'prefix': 'date_from_unix_date'
-    'body': 'DATE_FROM_UNIX_DATE(${1:INT64_expression})'
+    'body': 'date_from_unix_date(${1:INT64_expression})'
     'description': """
       Interprets `INT64_expression` as the number of days since 1970-01-01.
     """
   'FORMAT_DATE()':
     'prefix': 'format_date'
-    'body': 'FORMAT_DATE(${1:format_string}, ${2:date_expr})'
+    'body': 'format_date(${1:format_string}, ${2:date_expr})'
     'description': """
       Formats the `date_expr` according to the specified `format_string`.
 
@@ -1444,7 +1444,7 @@
     """
   'PARSE_DATE()':
     'prefix': 'parse_date'
-    'body': 'PARSE_DATE(${1:format_string}, ${2:date_string})'
+    'body': 'parse_date(${1:format_string}, ${2:date_string})'
     'description': """
       Uses a `format_string` and a string representation of a date to return a DATE object.
 
@@ -1459,14 +1459,14 @@
     """
   'UNIX_DATE()':
     'prefix': 'unix_date'
-    'body': 'UNIX_DATE(${1:date_expression})'
+    'body': 'unix_date(${1:date_expression})'
     'description': """
       Returns the number of days since 1970-01-01.
     """
 
   'CURRENT_DATETIME()':
     'prefix': 'current_datetime'
-    'body': 'CURRENT_DATETIME(${1:[timezone]})'
+    'body': 'current_datetime(${1:[timezone]})'
     'description': """
       Returns the current time as a DATETIME object.
 
@@ -1474,25 +1474,25 @@
     """
   'DATETIME(year, month, day, hour, minute, second)':
     'prefix': 'datetime use INT'
-    'body': 'DATETIME(${1:year}, ${2:month}, ${3:day}, ${4:hour}, ${5:minute}, ${6:second})'
+    'body': 'datetime(${1:year}, ${2:month}, ${3:day}, ${4:hour}, ${5:minute}, ${6:second})'
     'description': """
       Constructs a `DATETIME` object using `INT64` values representing the year, month, day, hour, minute, and second.
     """
   'DATETIME(date, time)':
     'prefix': 'datetime use DATE TIME'
-    'body': 'DATETIME(${1:date_expression}, ${2:time_expression})'
+    'body': 'datetime(${1:date_expression}, ${2:time_expression})'
     'description': """
       Constructs a `DATETIME` object using a `DATE` object and a `TIME` object.
     """
   'DATETIME(timestamp)':
     'prefix': 'datetime use TIMESTAMP'
-    'body': 'DATETIME(${1:timestamp_expression[, timezone]})'
+    'body': 'datetime(${1:timestamp_expression[, timezone]})'
     'description': """
       Constructs a `DATETIME` object using a `TIMESTAMP` object. It supports an optional parameter to specify a timezone. If no timezone is specified, the default timezone, UTC, is used.
     """
   'DATETIME_ADD()':
     'prefix': 'datetime_add'
-    'body': 'DATETIME_ADD(${1:datetime_expression}, INTERVAL ${2:INT64_expr part})'
+    'body': 'datetime_add(${1:datetime_expression}, interval ${2:INT64_expr part})'
     'description': """
       Adds `INT64_expr` units of `part` to the DATETIME object.
 
@@ -1513,7 +1513,7 @@
     """
   'DATETIME_SUB()':
     'prefix': 'datetime_sub'
-    'body': 'DATETIME_SUB(${1:datetime_expression}, INTERVAL ${2:INT64_expr part})'
+    'body': 'datetime_sub(${1:datetime_expression}, INTERVAL ${2:INT64_expr part})'
     'description': """
       Subtracts `INT64_expr` units of `part` from the DATETIME.
 
@@ -1534,7 +1534,7 @@
     """
   'DATETIME_DIFF()':
     'prefix': 'datetime_diff'
-    'body': 'DATETIME_DIFF(${1:datetime_expression}, ${2:datetime_expression}, ${3:part})'
+    'body': 'datetime_diff(${1:datetime_expression}, ${2:datetime_expression}, ${3:part})'
     'description': """
       Returns the number of `part` boundaries between the two `datetime_expressions`. If the first `DATETIME` occurs before the second `DATETIME`, then the result is non-positive. Throws an error if the computation overflows the result type, such as if the difference in microseconds between the two `DATETIME` objects would overflow an `INT64` value.
 
@@ -1555,7 +1555,7 @@
     """
   'DATETIME_TRUNC()':
     'prefix': 'datetime_trunc'
-    'body': 'DATETIME_TRUNC(${1:datetime_expression}, ${2:part})'
+    'body': 'datetime_trunc(${1:datetime_expression}, ${2:part})'
     'description': """
       Truncates a `DATETIME` object to the granularity of `part`.
 
@@ -1577,7 +1577,7 @@
     """
   'FORMAT_DATETIME()':
     'prefix': 'format_datetime'
-    'body': 'FORMAT_DATETIME(${1:format_string}, ${2:datetime_expression})'
+    'body': 'format_datetime(${1:format_string}, ${2:datetime_expression})'
     'description': """
       Formats a DATETIME object according to the specified `format_string`.
 
@@ -1585,7 +1585,7 @@
     """
   'PARSE_DATETIME()':
     'prefix': 'parse_datetime'
-    'body': 'PARSE_DATETIME(${1:format_string}, ${2:string})'
+    'body': 'parse_datetime(${1:format_string}, ${2:string})'
     'description': """
       Uses a `format_string` and a `string` representation of a timestamp to return a TIMESTAMP object.
 
@@ -1601,31 +1601,31 @@
 
   'CURRENT_TIME()':
     'prefix': 'current_time'
-    'body': 'CURRENT_TIME()'
+    'body': 'current_time()'
     'description': """
       Returns the current time as a TIME object.
     """
   'TIME(hour, minute, second)':
     'prefix': 'time use int'
-    'body': 'TIME(${1:hour}, ${2:minute}, ${3:second})'
+    'body': 'time(${1:hour}, ${2:minute}, ${3:second})'
     'description': """
       Constructs a `TIME` object using `INT64` values representing the hour, minute, and second.
     """
   'TIME(datetime)':
     'prefix': 'time use object'
-    'body': 'TIME(${1:datetime})'
+    'body': 'time(${1:datetime})'
     'description': """
       Constructs a `TIME` object using a `DATETIME` object.
     """
   'TIME(timestamp)':
     'prefix': 'time'
-    'body': 'TIME(${1:timestamp[, timezone]})'
+    'body': 'time(${1:timestamp[, timezone]})'
     'description': """
       Constructs a `TIME` object using a `TIMESTAMP` object. It supports an optional parameter to specify a timezone. If no timezone is specified, the default timezone, UTC, is used.
     """
   'TIME_ADD()':
     'prefix': 'time_add'
-    'body': 'TIME_ADD(${1:time_expression}, INTERVAL ${2:INT64_expr part})'
+    'body': 'time_add(${1:time_expression}, interval ${2:INT64_expr part})'
     'description': """
       Adds `INT64_expr` units of `part` to the TIME object.
 
@@ -1642,7 +1642,7 @@
     """
   'TIME_SUB()':
     'prefix': 'time_sub'
-    'body': 'TIME_SUB(${1:time_expression}, INTERVAL ${2:INT64_expr part})'
+    'body': 'time_sub(${1:time_expression}, interval ${2:INT64_expr part})'
     'description': """
       Subtracts `INT64_expr` units of `part` from the TIME object.
 
@@ -1659,7 +1659,7 @@
     """
   'TIME_DIFF()':
     'prefix': 'time_diff'
-    'body': 'TIME_DIFF(${1:time_expression}, ${2:time_expression}, ${3:part})'
+    'body': 'time_diff(${1:time_expression}, ${2:time_expression}, ${3:part})'
     'description': """
       Returns the number of whole specified `part` intervals between two TIME objects.
       Throws an error if the computation overflows the result type, such as if the difference in microseconds between the two time objects would overflow an INT64 value.
@@ -1674,7 +1674,7 @@
     """
   'TIME_TRUNC()':
     'prefix': 'time_trunc'
-    'body': 'TIME_TRUNC(${1:time_expression}, ${2:part})'
+    'body': 'time_trunc(${1:time_expression}, ${2:part})'
     'description': """
       Truncates a TIME object to the granularity of `part`.
 
@@ -1688,14 +1688,14 @@
     """
   'FORMAT_TIME()':
     'prefix': 'format_time'
-    'body': 'FORMAT_TIME(${1:format_string}, ${2:time_object})'
+    'body': 'format_time(${1:format_string}, ${2:time_object})'
     'description': """
       Formats a TIME object according to the specified `format_string`.
       See Supported Format Elements For TIME for a list of format elements that this function supports.
     """
   'PARSE_TIME()':
     'prefix': 'parse_time'
-    'body': 'PARSE_TIME(${1:format_string}, ${2:string})'
+    'body': 'parse_time(${1:format_string}, ${2:string})'
     'description': """
       Uses a `format_string` and a string to return a TIME object.
       See Supported Format Elements For TIME for a list of format elements that this function supports.
@@ -1707,13 +1707,13 @@
 
   'CURRENT_TIMESTAMP()':
     'prefix': 'current_timestamp'
-    'body': 'CURRENT_TIMESTAMP()'
+    'body': 'current_timestamp()'
     'description': """
       Parentheses are optional. This function handles leap seconds by smearing them across a window of 20 hours around the inserted leap second. `CURRENT_TIMESTAMP()` produces a TIMESTAMP value that is continuous, non-ambiguous, has exactly 60 seconds per minute and does not repeat values over the leap second.
     """
   'EXTRACT(part FROM timestamp)':
     'prefix': 'extract timestamp'
-    'body': 'EXTRACT(${1:part} FROM ${2:timestamp_expression [AT TIME ZONE tz_spec]})'
+    'body': 'extract(${1:part} from ${2:timestamp_expression [at time zone tz_spec]})'
     'description': """
       Returns an `INT64` value that corresponds to the specified `part` from a supplied `timestamp_expression`.
 
@@ -1746,32 +1746,32 @@
     """
   'STRING()':
     'prefix': 'string'
-    'body': 'STRING(${1:timestamp_expression[, timezone]})'
+    'body': 'string(${1:timestamp_expression[, timezone]})'
     'description': """
       Converts a `timestamp_expression` to a STRING data type. Supports an optional parameter to specify a timezone.
       See Timezone definitions for information on how to specify a time zone.
     """
   'TIMESTAMP(string)':
     'prefix': 'timestamp use STRING'
-    'body': 'TIMESTAMP(${1:string_expression[, timezone]})'
+    'body': 'timestamp(${1:string_expression[, timezone]})'
     'description': """
       Converts a STRING expression to a TIMESTAMP data type.
     """
   'TIMESTAMP(date)':
     'prefix': 'timestamp use DATE'
-    'body': 'TIMESTAMP(${1:date_expression[, timezone]})'
+    'body': 'timestamp(${1:date_expression[, timezone]})'
     'description': """
       Converts a DATE object to a TIMESTAMP data type.
     """
   'TIMESTAMP(datetime)':
     'prefix': 'timestamp use DATETIME'
-    'body': 'TIMESTAMP(${1:datetime_expression[, timezone]})'
+    'body': 'timestamp(${1:datetime_expression[, timezone]})'
     'description': """
       Converts a DATETIME object to a TIMESTAMP data type.
     """
   'TIMESTAMP_ADD()':
     'prefix': 'timestamp_add'
-    'body': 'TIMESTAMP_ADD(${1:timestamp_expression}, INTERVAL ${2:INT64_expr date_part})'
+    'body': 'timestamp_add(${1:timestamp_expression}, interval ${2:INT64_expr date_part})'
     'description': """
       Adds `INT64_expr` units of `date_part` to the timestamp, independent of any time zone.
 
@@ -1782,10 +1782,11 @@
         * `SECOND`
         * `MINUTE`
         * `HOUR`. Equivalent to 60 `MINUTE`s.
+        * `DAY`. Equivalent to 24 `HOUR`s.
     """
   'TIMESTAMP_SUB()':
     'prefix': 'timestamp_sub'
-    'body': 'TIMESTAMP_SUB(${1:timestamp_expression}, INTERVAL ${2:INT64_expr date_part})'
+    'body': 'timestamp_sub(${1:timestamp_expression}, interval ${2:INT64_expr date_part})'
     'description': """
       Subtracts `INT64_expr` units of `date_part` from the timestamp, independent of any time zone.
 
@@ -1796,10 +1797,11 @@
         * `SECOND`
         * `MINUTE`
         * `HOUR`. Equivalent to 60 `MINUTE`s.
+        * `DAY`. Equivalent to 24 `HOUR`s.
     """
   'TIMESTAMP_DIFF()':
     'prefix': 'timestamp_diff'
-    'body': 'TIMESTAMP_DIFF(${1:timestamp_expression}, ${2:timestamp_expression}, ${3:date_part})'
+    'body': 'timestamp_diff(${1:timestamp_expression}, ${2:timestamp_expression}, ${3:date_part})'
     'description': """
       Returns the number of whole specified `date_part` intervals between two timestamps. Throws an error if the computation overflows the result type, such as if the difference in microseconds between the two timestamps would overflow an INT64 value.
 
@@ -1810,10 +1812,11 @@
         * `SECOND`
         * `MINUTE`
         * `HOUR`. Equivalent to 60 `MINUTE`s.
+        * `DAY`. Equivalent to 24 `HOUR`s.
     """
   'TIMESTAMP_TRUNC()':
     'prefix': 'timestamp_trunc'
-    'body': 'TIMESTAMP_TRUNC(${1:timestamp_expression}, ${2:date_part, [, time_zone]})'
+    'body': 'timestamp_trunc(${1:timestamp_expression}, ${2:date_part, [, time_zone]})'
     'description': """
       Truncates a timestamp to the granularity of `date_part`.
 
@@ -1837,7 +1840,7 @@
     """
   'FORMAT_TIMESTAMP()':
     'prefix': 'format_timestamp'
-    'body': 'FORMAT_TIMESTAMP(${1:format_string}, ${2:timestamp[, time_zone]})'
+    'body': 'format_timestamp(${1:format_string}, ${2:timestamp[, time_zone]})'
     'description': """
       Formats a timestamp according to the specified `format_string`.
 
@@ -1845,7 +1848,7 @@
     """
   'PARSE_TIMESTAMP()':
     'prefix': 'parse_timestamp'
-    'body': 'PARSE_TIMESTAMP(${1:format_string}, ${2:string[, time_zone]})'
+    'body': 'parse_timestamp(${1:format_string}, ${2:string[, time_zone]})'
     'description': """
       Uses a `format_string` and a string representation of a timestamp to return a TIMESTAMP object.
 
@@ -1860,51 +1863,51 @@
     """
   'TIMESTAMP_SECONDS()':
     'prefix': 'timestamp_seconds'
-    'body': 'TIMESTAMP_SECONDS(${1:int64_expression})'
+    'body': 'timestamp_seconds(${1:int64_expression})'
     'description': """
       Interprets `int64_expression` as the number of seconds since 1970-01-01 00:00:00 UTC.
     """
   'TIMESTAMP_MILLIS()':
     'prefix': 'timestamp_millis'
-    'body': 'TIMESTAMP_MILLIS(${1:int64_expression})'
+    'body': 'timestamp_millis(${1:int64_expression})'
     'description': """
       Interprets `int64_expression` as the number of milliseconds since 1970-01-01 00:00:00 UTC.
     """
   'TIMESTAMP_MICROS()':
     'prefix': 'timestamp_micros'
-    'body': 'TIMESTAMP_MICROS(${1:int64_expression})'
+    'body': 'timestamp_micros(${1:int64_expression})'
     'description': """
       Interprets `int64_expression` as the number of microseconds since 1970-01-01 00:00:00 UTC.
     """
   'UNIX_SECONDS()':
     'prefix': 'unix_seconds'
-    'body': 'UNIX_SECONDS(${1:timestamp_expression})'
+    'body': 'unix_seconds(${1:timestamp_expression})'
     'description': """
       Returns the number of seconds since 1970-01-01 00:00:00 UTC. Truncates higher levels of precision.
     """
   'UNIX_MILLIS()':
     'prefix': 'unix_millis'
-    'body': 'UNIX_MILLIS(${1:timestamp_expression})'
+    'body': 'unix_millis(${1:timestamp_expression})'
     'description': """
       Returns the number of milliseconds since 1970-01-01 00:00:00 UTC. Truncates higher levels of precision.
     """
   'UNIX_MICROS()':
     'prefix': 'unix_micros'
-    'body': 'UNIX_MICROS(${1:timestamp_expression})'
+    'body': 'unix_micros(${1:timestamp_expression})'
     'description': """
       Returns the number of microseconds since 1970-01-01 00:00:00 UTC. Truncates higher levels of precision.
     """
 
   'SESSION_USER()':
     'prefix': 'session_user'
-    'body': 'SESSION_USER()'
+    'body': 'session_user()'
     'description': """
       Returns the email address of whoever is executing the query.
     """
 
   'NET.IP_FROM_STRING()':
     'prefix': 'net.ip_from_string'
-    'body': 'NET.IP_FROM_STRING(${1:addr_str})'
+    'body': 'net.ip_from_string(${1:addr_str})'
     'description': """
       Converts an IPv4 or IPv6 address from text (STRING) format to binary (BYTES) format in network byte order.
 
@@ -1919,13 +1922,13 @@
     """
   'NET.SAFE_IP_FROM_STRING()':
     'prefix': 'net.safe_ip_from_string'
-    'body': 'NET.SAFE_IP_FROM_STRING(${1:addr_str})'
+    'body': 'net.safe_ip_from_string(${1:addr_str})'
     'description': """
       Similar to NET.IP_FROM_STRING, but returns `NULL` instead of throwing an error if the input is invalid.
     """
   'NET.IP_TO_STRING()':
     'prefix': 'net.ip_to_string'
-    'body': 'NET.IP_TO_STRING(${1:addr_bin})'
+    'body': 'net.ip_to_string(${1:addr_bin})'
     'description': """
       Converts an IPv4 or IPv6 address from binary (BYTES) format in network byte order to text (STRING) format.
 
@@ -1935,13 +1938,13 @@
     """
   'NET.IP_NET_MASK()':
     'prefix': 'net.ip_net_mask'
-    'body': 'NET.IP_NET_MASK(${1:num_output_bytes}, ${2:prefix_length})'
+    'body': 'net.ip_net_mask(${1:num_output_bytes}, ${2:prefix_length})'
     'description': """
       Returns a network mask: a byte sequence with length equal to `num_output_bytes`, where the first `prefix_length` bits are set to 1 and the other bits are set to 0. `num_output_bytes` and `prefix_length` are INT64. This function throws an error if `num_output_bytes` is not 4 (for IPv4) or 16 (for IPv6). It also throws an error if `prefix_length` is negative or greater than `8 * num_output_bytes`.
     """
   'NET.IP_TRUNC()':
     'prefix': 'net.ip_trunc'
-    'body': 'NET.IP_TRUNC(${1:addr_bin}, ${2:prefix_length})'
+    'body': 'net.ip_trunc(${1:addr_bin}, ${2:prefix_length})'
     'description': """
       Takes `addr_bin`, an IPv4 or IPv6 address in binary (BYTES) format in network byte order, and returns a subnet address in the same format. The result has the same length as `addr_bin`, where the first `prefix_length` bits are equal to those in `addr_bin` and the remaining bits are 0.
 
@@ -1949,7 +1952,7 @@
     """
   'NET.IPV4_FROM_INT64()':
     'prefix': 'net.ipv4_from_int64'
-    'body': 'NET.IPV4_FROM_INT64(${1:integer_value})'
+    'body': 'net.ipv4_from_int64(${1:integer_value})'
     'description': """
       Converts an IPv4 address from integer format to binary (BYTES) format in network byte order. In the integer input, the least significant bit of the IP address is stored in the least significant bit of the integer, regardless of host or client architecture. For example, `1` means `0.0.0.1`, and `0x1FF` means `0.0.1.255`.
 
@@ -1959,7 +1962,7 @@
     """
   'NET.IPV4_TO_INT64()':
     'prefix': 'net.ipv4_to_int64'
-    'body': 'NET.IPV4_TO_INT64(${1:addr_bin})'
+    'body': 'net.ipv4_to_int64(${1:addr_bin})'
     'description': """
       Converts an IPv4 address from binary (BYTES) format in network byte order to integer format. In the integer output, the least significant bit of the IP address is stored in the least significant bit of the integer, regardless of host or client architecture. For example, `1` means `0.0.0.1`, and `0x1FF` means `0.0.1.255`. The output is in the range `[0, 0xFFFFFFFF]`.
 
@@ -1969,13 +1972,13 @@
     """
   'NET.HOST()':
     'prefix': 'net.host'
-    'body': 'NET.HOST(${1:url})'
+    'body': 'net.host(${1:url})'
     'description': """
       Takes a URL as a STRING and returns the host as a STRING. For best results, URL values should comply with the format as defined by RFC 3986. If the URL value does not comply with RFC 3986 formatting, this function makes a best effort to parse the input and return a relevant result. If the function cannot parse the input, it returns NULL.
     """
   'NET.PUBLIC_SUFFIX()':
     'prefix': 'net.public_suffix'
-    'body': 'NET.PUBLIC_SUFFIX(${1:url})'
+    'body': 'net.public_suffix(${1:url})'
     'description': """
       Takes a URL as a STRING and returns the public suffix (such as `com`, `org`, or `net`) as a STRING. A public suffix is an ICANN domain registered at publicsuffix.org. For best results, URL values should comply with the format as defined by RFC 3986. If the URL value does not comply with RFC 3986 formatting, this function makes a best effort to parse the input and return a relevant result.
 
@@ -1989,7 +1992,7 @@
     """
   'NET.REG_DOMAIN()':
     'prefix': 'net.reg_domain'
-    'body': 'NET.REG_DOMAIN(${1:url})'
+    'body': 'net.reg_domain(${1:url})'
     'description': """
       Takes a URL as a STRING and returns the registered or registerable domain (the public suffix plus one preceding label), as a STRING. For best results, URL values should comply with the format as defined by RFC 3986. If the URL value does not comply with RFC 3986 formatting, this function makes a best effort to parse the input and return a relevant result.
 
@@ -2006,11 +2009,11 @@
   'CASE expr WHEN value ... END':
     'prefix': 'case'
     'body': """
-    CASE ${1:expr}
-      WHEN ${2:value} THEN ${3:result}
-      WHEN ${4:value} THEN ${5:result}
-      ELSE ${6:else_result}
-    END
+    case ${1:expr}
+      when ${2:value} then ${3:result}
+      when ${4:value} then ${5:result}
+      else ${6:else_result}
+    end
     """
     'description': """
       Compares `expr` to value of each successive `WHEN` clause and returns the first result where this comparison returns true. The remaining `WHEN` clauses and `else_result` are not evaluated. If the `expr = value` comparison returns false or `NULL` for all `WHEN` clauses, returns `else_result`. `expr` and value expressions must be implicitly coercible to a common supertype; equality comparisons are done on coerced values. `result` and `else_result` expressions must be coercible to a common supertype.
@@ -2018,11 +2021,11 @@
   'CASE WHEN condition ... END':
     'prefix': 'casecond'
     'body': """
-    CASE
-      WHEN ${1:cond} THEN ${2:result}
-      WHEN ${4:cond} THEN ${5:result}
-      ELSE ${6:else_result}
-    END
+    case
+      when ${1:cond} then ${2:result}
+      when ${4:cond} then ${5:result}
+      else ${6:else_result}
+    end
     """
     'description': """
       Evaluates condition `cond` of each successive `WHEN` clause and returns the first result where the condition is true; any remaining `WHEN` clauses and `else_result` are not evaluated. If all conditions are false or `NULL`, returns `else_result`. `result` and `else_result` expressions must be implicitly coercible to a common supertype.
@@ -2030,79 +2033,79 @@
 
   'COALESCE()':
     'prefix': 'coalesce'
-    'body': 'COALESCE(${1:expr1, ..., exprN})'
+    'body': 'coalesce(${1:expr1, ..., exprN})'
     'description': """
       Returns the value of the first non-null expression. The remaining expressions are not evaluated. All input expressions must be implicitly coercible to a common supertype.
     """
   'IF()':
     'prefix': 'if'
-    'body': 'IF(${1:cond}, ${2:true_result}, ${3:else_result})'
+    'body': 'if(${1:cond}, ${2:true_result}, ${3:else_result})'
     'description': """
       If `cond` is true, returns `true_result`, else returns `else_result`. `else_result` is not evaluated if `cond` is true. `true_result` is not evaluated if `cond` is false or `NULL`. `true_result` and `else_result` must be coercible to a common supertype.
     """
   'IFNULL()':
     'prefix': 'ifnull'
-    'body': 'IFNULL(${1:expr}, ${2:null_result})'
+    'body': 'ifnull(${1:expr}, ${2:null_result})'
     'description': """
       If `expr` is `NULL`, return `null_result`. Otherwise, return `expr`. If `expr` is not `NULL`, `null_result` is not evaluated. `expr` and `null_result` must be implicitly coercible to a common supertype. Synonym for `COALESCE(expr, null_result)`.
     """
   'NULLIF()':
     'prefix': 'nullif'
-    'body': 'NULLIF(${1:expression}, ${2:expression_to_match})'
+    'body': 'nullif(${1:expression}, ${2:expression_to_match})'
     'description': """
       Returns `NULL` if `expression = expression_to_match` is true, otherwise returns `expression`. `expression` and `expression_to_match` must be implicitly coercible to a common supertype; equality comparison is done on coerced values.
     """
 
   'EXTRACT(DAYOFWEEK FROM date_expression)':
     'prefix': 'dayofweek'
-    'body': 'EXTRACT(DAYOFWEEK FROM ${1:date_expression})'
+    'body': 'extract(dayofweek from ${1:date_expression})'
   'EXTRACT(DAY FROM date_expression)':
     'prefix': 'day'
-    'body': 'EXTRACT(DAY FROM ${1:date_expression})'
+    'body': 'extract(day from ${1:date_expression})'
   'EXTRACT(DAYOFYEAR FROM date_expression)':
     'prefix': 'dayofyear'
-    'body': 'EXTRACT(DAYOFYEAR FROM ${1:date_expression})'
+    'body': 'extract(dayofyear from ${1:date_expression})'
   'EXTRACT(WEEK FROM date_expression)':
     'prefix': 'week'
-    'body': 'EXTRACT(WEEK FROM ${1:date_expression})'
+    'body': 'extract(week from ${1:date_expression})'
   'EXTRACT(WEEK<WEEKDAY> FROM date_expression)':
     'prefix': 'weekday'
-    'body': 'EXTRACT(WEEK(${1:<WEEKDAY>}) FROM ${2:date_expression})'
+    'body': 'extract(week(${1:<weekday>}) from ${2:date_expression})'
   'EXTRACT(ISOWEEK FROM date_expression)':
     'prefix': 'isoweek'
-    'body': 'EXTRACT(ISOWEEK FROM ${1:date_expression})'
+    'body': 'extract(isoweek from ${1:date_expression})'
   'EXTRACT(MONTH FROM date_expression)':
     'prefix': 'month'
-    'body': 'EXTRACT(MONTH FROM ${1:date_expression})'
+    'body': 'extract(month from ${1:date_expression})'
   'EXTRACT(QUARTER FROM date_expression)':
     'prefix': 'quarter'
-    'body': 'EXTRACT(QUARTER FROM ${1:date_expression})'
+    'body': 'extract(quarter from ${1:date_expression})'
   'EXTRACT(YEAR FROM date_expression)':
     'prefix': 'year'
-    'body': 'EXTRACT(YEAR FROM ${1:date_expression})'
+    'body': 'extract(year from ${1:date_expression})'
   'EXTRACT(ISOYEAR FROM date_expression)':
     'prefix': 'isoyear'
-    'body': 'EXTRACT(ISOYEAR FROM ${1:date_expression})'
+    'body': 'extract(isoyear from ${1:date_expression})'
 
   'EXTRACT(MICROSECOND FROM timestamp_expression)':
     'prefix': 'microsecond'
-    'body': 'EXTRACT(MICROSECOND FROM ${1:timestamp_expression [AT TIME ZONE tz_spec]})'
+    'body': 'extract(microsecond from ${1:timestamp_expression [at time zone tz_spec]})'
   'EXTRACT(MILLISECOND FROM timestamp_expression)':
     'prefix': 'millisecond'
-    'body': 'EXTRACT(MILLISECOND FROM ${1:timestamp_expression [AT TIME ZONE tz_spec]})'
+    'body': 'extract(millisecond from ${1:timestamp_expression [at time zone tz_spec]})'
   'EXTRACT(SECOND FROM timestamp_expression)':
     'prefix': 'second'
-    'body': 'EXTRACT(SECOND FROM ${1:timestamp_expression [AT TIME ZONE tz_spec]})'
+    'body': 'extract(second from ${1:timestamp_expression [at time zone tz_spec]})'
   'EXTRACT(MINUTE FROM timestamp_expression)':
     'prefix': 'minute'
-    'body': 'EXTRACT(MINUTE FROM ${1:timestamp_expression [AT TIME ZONE tz_spec]})'
+    'body': 'extract(minute from ${1:timestamp_expression [at time zone tz_spec]})'
   'EXTRACT(HOUR FROM timestamp_expression)':
     'prefix': 'hour'
-    'body': 'EXTRACT(HOUR FROM ${1:timestamp_expression [AT TIME ZONE tz_spec]})'
+    'body': 'extract(hour from ${1:timestamp_expression [at time zone tz_spec]})'
 
   'ERROR()':
     'prefix': 'error'
-    'body': 'ERROR(${1:error_message})'
+    'body': 'error(${1:error_message})'
     'description': """
       Returns an error. The error_message argument is a STRING.
 
@@ -2111,7 +2114,7 @@
 
   'SAFE.prefix()':
     'prefix': 'safeprefix'
-    'body': 'SAFE.${1:function_name()}'
+    'body': 'safeprefix.${1:function_name()}'
     'description': """
       If you begin a function with the SAFE. prefix, it will return NULL instead of an error. The SAFE. prefix only prevents errors from the prefixed function itself: it does not prevent errors that occur while evaluating argument expressions. The SAFE. prefix only prevents errors that occur because of the value of the function inputs, such as "value out of range" errors; other errors, such as internal or system errors, may still occur. If the function does not return an error, SAFE. has no effect on the output. If the function never returns an error, like RAND, then SAFE. has no effect.
 
@@ -2121,213 +2124,213 @@
   'ML.EVALUATE()':
     'prefix': 'mlevaluate'
     'body': """
-      ML.EVALUATE(MODEL `${1:project}.${2:dataset}.${3:model}`,
-      \t${4:\{TABLE table_name | (query_statement)\}},
-      \t${5:[STRUCT(<T> AS threshold)]})
+      ml.evaluate(model `${1:project}.${2:dataset}.${3:model}`,
+      \t${4:\{table table_name | (query_statement)\}},
+      \t${5:[struct(<T> as threshold)]})
     """
   'ML.ROC_CURVE()':
     'prefix': 'mlroccurve'
     'body': """
-      ML.ROC_CURVE(MODEL `${1:project}.${2:dataset}.${3:model}`,
-      \t${4:\{TABLE table_name | (query_statement)\}},
-      \t${5:[GENERATE_ARRAY(thresholds)]})
+      ml.roc_curve(model `${1:project}.${2:dataset}.${3:model}`,
+      \t${4:\{table table_name | (query_statement)\}},
+      \t${5:[generate_array(thresholds)]})
     """
   'ML.CONFUSION_MATRIX()':
     'prefix': 'mlconfusionmatrix'
     'body': """
-      ML.CONFUSION_MATRIX(MODEL `${1:project}.${2:dataset}.${3:model}`,
-      \t${4:\{TABLE table_name | (query_statement)\}},
-      \t${5:[GENERATE_ARRAY(thresholds)]})
+      ml.confusion_matrix(model `${1:project}.${2:dataset}.${3:model}`,
+      \t${4:\{table table_name | (query_statement)\}},
+      \t${5:[generate_array(thresholds)]})
     """
   'ML.TRAINING_INFO()':
     'prefix': 'mltraininginfo'
-    'body': 'ML.TRAINING_INFO(MODEL `${1:project}.${2:dataset}.${3:model}`)'
+    'body': 'ml.training_info(model `${1:project}.${2:dataset}.${3:model}`)'
   'ML.FEATURE_INFO()':
     'prefix': 'mlfeatureinfo'
-    'body': 'ML.FEATURE_INFO(MODEL `${1:project}.${2:dataset}.${3:model}`)'
+    'body': 'ml.feature_info(model `${1:project}.${2:dataset}.${3:model}`)'
   'ML.WEIGHTS()':
     'prefix': 'mlweights'
     'body': """
-      ML.WEIGHTS(MODEL `${1:project}.${2:dataset}.${3:model}`,
-      \t${4:[STRUCT(<T> AS standardize)]})
+      ml.weights(model `${1:project}.${2:dataset}.${3:model}`,
+      \t${4:[struct(<T> AS standardize)]})
     """
   'ML.PREDICT()':
     'prefix': 'mlpredict'
     'body': """
-      ML.PREDICT(MODEL `${1:project}.${2:dataset}.${3:model}`,
-      \t${4:\{TABLE table_name | (query_statement)\}},
-      \t${5:[STRUCT(<threshold FLOAT64> AS threshold)]})
+      ml.predict(model `${1:project}.${2:dataset}.${3:model}`,
+      \t${4:\{table table_name | (query_statement)\}},
+      \t${5:[struct(<threshold FLOAT64> AS threshold)]})
     """
 
   'ST_GEOGPOINT()':
     'prefix': 'stgeogpoint'
-    'body': 'ST_GEOGPOINT(${1:longitude}, ${2:latitude})'
+    'body': 'st_geopoint(${1:longitude}, ${2:latitude})'
   'ST_MAKELINE()':
     'prefix': 'stmakeline'
-    'body': 'ST_MAKELINE(${1:geography_1, geography_2 | array_of_geography})'
+    'body': 'st_makeline(${1:geography_1, geography_2 | array_of_geography})'
   'ST_MAKEPOLYGON()':
     'prefix': 'stmakepolygon'
-    'body': 'ST_MAKEPOLYGON(${1:geography_expression[, array_of_geography]})'
+    'body': 'st_makepolygon(${1:geography_expression[, array_of_geography]})'
   'ST_MAKEPOLYGONORIENTED()':
     'prefix': 'stmakepolygonoriented'
-    'body': 'ST_MAKEPOLYGONORIENTED(${1:array_of_geography})'
+    'body': 'st_makepolygonoriented(${1:array_of_geography})'
   'ST_GEOGFROMGEOJSON()':
     'prefix': 'stgeogfromgeojson'
-    'body': 'ST_GEOGFROMGEOJSON(${1:geojson_string})'
+    'body': 'st_geogfromgeojson(${1:geojson_string})'
   'ST_GEOGFROMTEXT()':
     'prefix': 'stgeogfromtext'
-    'body': 'ST_GEOGFROMTEXT(${1:wkt_string})'
+    'body': 'st_geogfromtext(${1:wkt_string})'
   'ST_ASGEOJSON()':
     'prefix': 'stasgeojson'
-    'body': 'ST_ASGEOJSON(${1:geography_expression})'
+    'body': 'st_asgeojson(${1:geography_expression})'
   'ST_ASTEXT()':
     'prefix': 'stastext'
-    'body': 'ST_ASTEXT(${1:geography_expression})'
+    'body': 'st_astext(${1:geography_expression})'
   'ST_BOUNDARY()':
     'prefix': 'stboundary'
-    'body': 'ST_BOUNDARY(${1:geography_expression})'
+    'body': 'st_boundary(${1:geography_expression})'
   'ST_CENTROID()':
     'prefix': 'stcentroid'
-    'body': 'ST_CENTROID(${1:geography_expression})'
+    'body': 'st_centroid(${1:geography_expression})'
   'ST_CLOSESTPOINT()':
     'prefix': 'stclosestpoint'
-    'body': 'ST_CLOSESTPOINT(${1:geography_1}, ${2:geography_2[, spheroid=FALSE]})'
+    'body': 'st_closestpoint(${1:geography_1}, ${2:geography_2[, spheroid=FALSE]})'
   'ST_DIFFERENCE()':
     'prefix': 'stdifference'
-    'body': 'ST_DIFFERENCE(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_difference(${1:geography_1}, ${2:geography_2})'
   'ST_INTERSECTION()':
     'prefix': 'stintersection'
-    'body': 'ST_INTERSECTION(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_intersection(${1:geography_1}, ${2:geography_2})'
   'ST_SNAPTOGRID()':
     'prefix': 'stsnaptogrid'
-    'body': 'ST_SNAPTOGRID(${1:geography_expression}, ${2:grid_size})'
+    'body': 'st_snaptogrid(${1:geography_expression}, ${2:grid_size})'
   'ST_UNION()':
     'prefix': 'stunion'
-    'body': 'ST_UNION(${1:geography_1, geography_2 | array_of_geography})'
+    'body': 'st_union(${1:geography_1, geography_2 | array_of_geography})'
   'ST_CONTAINS()':
     'prefix': 'stcontains'
-    'body': 'ST_CONTAINS(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_contains(${1:geography_1}, ${2:geography_2})'
   'ST_COVEREDBY()':
     'prefix': 'stcoveredby'
-    'body': 'ST_COVEREDBY(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_coveredby(${1:geography_1}, ${2:geography_2})'
   'ST_COVERS()':
     'prefix': 'stcovers'
-    'body': 'ST_COVERS(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_covers(${1:geography_1}, ${2:geography_2})'
   'ST_DISJOINT()':
     'prefix': 'stdisjoint'
-    'body': 'ST_DISJOINT(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_disjoint(${1:geography_1}, ${2:geography_2})'
   'ST_DWITHIN()':
     'prefix': 'stdwithin'
-    'body': 'ST_DWITHIN(${1:geography_1}, ${2:geography_2}, ${3:distance[, spheroid=FALSE]})'
+    'body': 'st_dwithin(${1:geography_1}, ${2:geography_2}, ${3:distance[, spheroid=FALSE]})'
   'ST_EQUALS()':
     'prefix': 'stequals'
-    'body': 'ST_EQUALS(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_equals(${1:geography_1}, ${2:geography_2})'
   'ST_INTERSECTS()':
     'prefix': 'stintersects'
-    'body': 'ST_INTERSECTS(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_intersects(${1:geography_1}, ${2:geography_2})'
   'ST_INTERSECTSBOX()':
     'prefix': 'stintersectsbox'
-    'body': 'ST_INTERSECTSBOX(${1:geography}, ${2:lng1}, ${3:lat1}, ${4:lng2}, ${5:lat2})'
+    'body': 'st_intersectsbox(${1:geography}, ${2:lng1}, ${3:lat1}, ${4:lng2}, ${5:lat2})'
   'ST_TOUCHES()':
     'prefix': 'sttouches'
-    'body': 'ST_TOUCHES(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_touches(${1:geography_1}, ${2:geography_2})'
   'ST_WITHIN()':
     'prefix': 'stwithin'
-    'body': 'ST_WITHIN(${1:geography_1}, ${2:geography_2})'
+    'body': 'st_within(${1:geography_1}, ${2:geography_2})'
   'ST_ISEMPTY()':
     'prefix': 'stisempty'
-    'body': 'ST_ISEMPTY(${1:geography_expression})'
+    'body': 'st_isempty(${1:geography_expression})'
   'ST_ISCOLLECTION()':
     'prefix': 'stiscollection'
-    'body': 'ST_ISCOLLECTION(${1:geography_expression})'
+    'body': 'st_iscollection(${1:geography_expression})'
   'ST_DIMENSION()':
     'prefix': 'stdimension'
-    'body': 'ST_DIMENSION(${1:geography_expression})'
+    'body': 'st_dimension(${1:geography_expression})'
   'ST_NUMPOINTS()':
     'prefix': 'stnumpoints'
-    'body': 'ST_NUMPOINTS(${1:geography_expression})'
+    'body': 'st_numpoints(${1:geography_expression})'
   'ST_AREA()':
     'prefix': 'starea'
-    'body': 'ST_AREA(${1:geography_expression[, spheroid=FALSE]})'
+    'body': 'st_area(${1:geography_expression[, spheroid=falsefalse]})'
   'ST_DISTANCE()':
     'prefix': 'stdistance'
-    'body': 'ST_DISTANCE(${1:geography_1}, ${2:geography_2[, spheroid=FALSE]})'
+    'body': 'st_distance(${1:geography_1}, ${2:geography_2[, spheroid=false]})'
   'ST_LENGTH()':
     'prefix': 'stlength'
-    'body': 'ST_LENGTH(${1:geography_expression[, spheroid=FALSE]})'
+    'body': 'st_length(${1:geography_expression[, spheroid=false]})'
   'ST_MAXDISTANCE()':
     'prefix': 'stmaxdistance'
-    'body': 'ST_MAXDISTANCE(${1:geography_1}, ${2:geography_2[, spheroid=FALSE]})'
+    'body': 'st_maxdistance(${1:geography_1}, ${2:geography_2[, spheroid=false]})'
   'ST_PERIMETER()':
     'prefix': 'stperimeter'
-    'body': 'ST_PERIMETER(${1:geography_expression[, spheroid=FALSE]})'
+    'body': 'st_perimeter(${1:geography_expression[, spheroid=false]})'
   'ST_UNION_AGG()':
     'prefix': 'stunionagg'
-    'body': 'ST_UNION_AGG(${1:geography})'
+    'body': 'st_union_agg(${1:geography})'
 
   'KEYS.NEW_KEYSET':
     'prefix': 'keysnew_keyset'
-    'body': 'KEYS.NEW_KEYSET(${1:key_type})'
+    'body': 'keys.new_keyset(${1:key_type})'
   'KEYS.ADD_KEY_FROM_RAW_BYTES':
     'prefix': 'keysadd_key_from_raw_bytes'
-    'body': 'KEYS.ADD_KEY_FROM_RAW_BYTES(${1:keyset}, ${2:key_type}, ${3:raw_key_bytes})'
+    'body': 'keys.add_key_from_raw_bytes(${1:keyset}, ${2:key_type}, ${3:raw_key_bytes})'
   'AEAD.DECRYPT_BYTES':
     'prefix': 'aeaddecrypt_bytes'
-    'body': 'AEAD.DECRYPT_BYTES(${1:keyset}, ${2:ciphertext}, ${3:additional_data})'
+    'body': 'aead.decrypt_bytes(${1:keyset}, ${2:ciphertext}, ${3:additional_data})'
   'AEAD.DECRYPT_STRING':
     'prefix': 'aeaddecrypt_string'
-    'body': 'AEAD.DECRYPT_STRING(${1:keyset}, ${2:ciphertext}, ${3:additional_data})'
+    'body': 'aead.decrypt_string(${1:keyset}, ${2:ciphertext}, ${3:additional_data})'
   'AEAD.ENCRYPT':
     'prefix': 'aeadencrypt'
-    'body': 'AEAD.ENCRYPT(${1:keyset}, ${2:plaintext}, ${3:additional_data})'
+    'body': 'aead.encrypt(${1:keyset}, ${2:plaintext}, ${3:additional_data})'
   'KEYS.KEYSET_FROM_JSON':
     'prefix': 'keyskeyset_from_json'
-    'body': 'KEYS.KEYSET_FROM_JSON(${1:json_keyset})'
+    'body': 'keys.keyset_from_json(${1:json_keyset})'
   'KEYS.KEYSET_TO_JSON':
     'prefix': 'keyskeyset_to_json'
-    'body': 'KEYS.KEYSET_TO_JSON(${1:keyset})'
+    'body': 'keys.keyset_to_json(${1:keyset})'
   'KEYS.ROTATE_KEYSET':
     'prefix': 'keysrotate_keyset'
-    'body': 'KEYS.ROTATE_KEYSET(${1:keyset}, ${2:key_type})'
+    'body': 'keys.rotate_keyset(${1:keyset}, ${2:key_type})'
 
   'INFORMATION_SCHEMA.SCHEMATA':
     'prefix': 'informationschemata'
-    'body': 'INFORMATION_SCHEMA.SCHEMATA'
+    'body': 'information_schema.schemata'
     'description': """
       When you query the INFORMATION_SCHEMA.SCHEMATA view, the query results contain one row for each dataset in a project to which the current user has access.
     """
 
   'INFORMATION_SCHEMA.SCHEMATA_OPTIONS':
     'prefix': 'informationschemataoptions'
-    'body': 'INFORMATION_SCHEMA.SCHEMATA_OPTIONS'
+    'body': 'information_schema.schemata_options'
     'description': """
       When you query the INFORMATION_SCHEMA.SCHEMATA_OPTIONS view, the query results contain one row for each dataset in a project to which the current user has access.
     """
 
   'INFORMATION_SCHEMA.TABLES':
     'prefix': 'informationtables'
-    'body': 'INFORMATION_SCHEMA.TABLES'
+    'body': 'information_schema.tables'
     'description': """
       When you query the INFORMATION_SCHEMA.TABLES view, the query results contain one row for each table or view in a dataset.
     """
 
   'INFORMATION_SCHEMA.TABLE_OPTIONS':
     'prefix': 'informationtableoptions'
-    'body': 'INFORMATION_SCHEMA.TABLE_OPTIONS'
+    'body': 'information_schema.table_options'
     'description': """
       When you query the INFORMATION_SCHEMA.TABLE_OPTIONS view, the query results contain one row for each table or view in a dataset.
     """
 
   'INFORMATION_SCHEMA.COLUMNS':
     'prefix': 'informationcolumns'
-    'body': 'INFORMATION_SCHEMA.COLUMNS'
+    'body': 'information_schema.columns'
     'description': """
       When you query the INFORMATION_SCHEMA.COLUMNS view, the query results contain one row for each column (field) in a table.
     """
 
   'INFORMATION_SCHEMA.VIEWS':
     'prefix': 'informationviews'
-    'body': 'INFORMATION_SCHEMA.VIEWS'
+    'body': 'information_schema.views'
     'description': """
       When you query the INFORMATION_SCHEMA.VIEWS view, the query results contain one row for each view in a dataset.
     """
@@ -2335,16 +2338,16 @@
   'SELECT ... FROM INFORMATION_SCHEMA.SCHEMATA':
     'prefix': 'selectinformationschemata'
     'body': """
-      SELECT
+      select
       \tcatalog_name,
       \tschema_name,
       \tschema_owner,
       \tcreation_time,
       \tlast_modified_time,
       \tlocation
-      FROM
-      \t`${1:project}.INFORMATION_SCHEMA.SCHEMATA`
-      ORDER BY
+      from
+      \t`${1:project}.information_schema.SCHEMATA`
+      order by
       \tschema_name
     """
     'description': """
@@ -2354,15 +2357,15 @@
   'SELECT ... FROM INFORMATION_SCHEMA.SCHEMATA_OPTIONS':
     'prefix': 'selectinformationschemataoptions'
     'body': """
-      SELECT
+      select
       \tcatalog_name,
       \tschema_name,
       \toption_name,
       \toption_type,
       \toption_value
-      FROM
-      \t`${1:project}.INFORMATION_SCHEMA.SCHEMATA_OPTIONS`
-      ORDER BY
+      from
+      \t`${1:project}.information_schema.schemata_options`
+      order by
       \tschema_name, option_name
     """
     'description': """
@@ -2372,7 +2375,7 @@
   'SELECT ... FROM INFORMATION_SCHEMA.TABLES':
     'prefix': 'selectinformationtables'
     'body': """
-      SELECT
+      select
       \ttable_catalog,
       \ttable_schema,
       \ttable_name,
@@ -2380,9 +2383,9 @@
       \tis_insertable_into,
       \tis_typed,
       \tcreation_time
-      FROM
-      \t`${1:project}.${2:dataset}.INFORMATION_SCHEMA.TABLES`
-      ORDER BY
+      from
+      \t`${1:project}.${2:dataset}.information_schema.tables`
+      order by
       \ttable_name
     """
     'description': """
@@ -2392,16 +2395,16 @@
   'SELECT ... FROM INFORMATION_SCHEMA.TABLE_OPTIONS':
     'prefix': 'selectinformationtableoptions'
     'body': """
-      SELECT
+      select
       \ttable_catalog,
       \ttable_schema,
       \ttable_name,
       \toption_name,
       \toption_type,
       \toption_value
-      FROM
-      \t`${1:project}.${2:dataset}.INFORMATION_SCHEMA.TABLE_OPTIONS`
-      ORDER BY
+      from
+      \t`${1:project}.${2:dataset}.information_schema.table_options`
+      order by
       \ttable_name, option_name
     """
     'description': """
@@ -2411,7 +2414,7 @@
   'SELECT ... FROM INFORMATION_SCHEMA.COLUMNS':
     'prefix': 'selectinformationcolumns'
     'body': """
-      SELECT
+      select
       \ttable_catalog,
       \ttable_schema,
       \ttable_name,
@@ -2427,9 +2430,9 @@
       \tis_system_defined,
       \tis_partitioning_column,
       \tclustering_ordinal_position
-      FROM
-      \t`${1:project}.${2:dataset}.INFORMATION_SCHEMA.COLUMNS`
-      ORDER BY
+      from
+      \t`${1:project}.${2:dataset}.information_schema.columns`
+      order by
       \ttable_name, ordinal_position
     """
     'description': """
@@ -2439,16 +2442,16 @@
   'SELECT ... FROM INFORMATION_SCHEMA.VIEWS':
     'prefix': 'selectinformationviews'
     'body': """
-      SELECT
+      select
       \ttable_catalog,
       \ttable_schema,
       \ttable_name,
       \tview_definition,
       \tcheck_option,
       \tuse_standard_sql
-      FROM
-      \t`${1:project}.${2:dataset}.INFORMATION_SCHEMA.VIEWS`
-      ORDER BY
+      from
+      \t`${1:project}.${2:dataset}.information_schema.view`
+      order by
       \ttable_name
     """
     'description': """
